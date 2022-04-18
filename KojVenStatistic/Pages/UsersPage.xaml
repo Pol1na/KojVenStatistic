@@ -1,0 +1,39 @@
+﻿<Page x:Class="KojVenStatistic.Pages.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KojVenStatistic.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UsersPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        
+
+        <DataGrid Grid.Row="1" Margin="10" Name="DGUsers" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id пользователя" Binding="{Binding Id}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Должность" Binding="{Binding Post.PostName}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Уровень доступа" Binding="{Binding AccessLevel.Name}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Стаж работы" Binding="{Binding Experience}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumber}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Почта" Binding="{Binding Email}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Name}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Паспортные данные" Binding="{Binding NumberPassport}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Кабинет" Binding="{Binding Cabinet.Name}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фото" Binding="{Binding Photo}" Width="auto"></DataGridTextColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</Page>

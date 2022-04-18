@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ebc4684cfdf34fd8baa989e9bd49e5f8" Name="Diagram1">
+        <EntityTypeShape EntityType="KojVenStatisticModel.AccessLevel" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Appeal" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Cabinet" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Client" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Disease" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Gender" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Medicament" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Post" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Recipe" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.ReportOfTheDay" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.ReportOfTheMonth" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.ReportOfTheWeek" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.ReportOfTheYear" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.TypeDisease" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_User_AccessLevel" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Appeal_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Appeal_Disease" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Appeal_User" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Recipe_Appeal" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_User_Cabinet" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Client_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Disease_TypeDisease" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_User_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_Recipe_Medicament" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_User_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_ReportOfTheDay_User" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_ReportOfTheMonth_User" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_ReportOfTheWeek_User" ManuallyRouted="false" />
+        <AssociationConnector Association="KojVenStatisticModel.FK_ReportOfTheYear_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

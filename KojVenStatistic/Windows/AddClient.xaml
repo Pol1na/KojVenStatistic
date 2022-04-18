@@ -1,0 +1,60 @@
+﻿<Window x:Class="KojVenStatistic.Windows.AddClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KojVenStatistic.Windows"
+        mc:Ignorable="d"
+        Title="AddClient" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Имя"/>
+                <TextBox FontSize="18" Name="TbFirstName" MinWidth="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Фамилия"/>
+                <TextBox FontSize="18" Name="TbLastName" MinWidth="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Номер паспорта"/>
+                <TextBox FontSize="18" Name="TbNumPass" MinWidth="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Адрес"/>
+                <TextBox FontSize="18" Name="TbAdress" MinWidth="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Дата рождения"/>
+                <DatePicker Name="DpDateBirth"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Номер СНИЛС"/>
+                <TextBox FontSize="18" Name="TbSnils" MinWidth="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10 0" FontSize="18" Text="Полис"/>
+                <TextBox FontSize="18" Name="TbPolis" MinWidth="100"/>
+            </StackPanel>
+            <ComboBox Name="CbGender" Margin="10 5" FontSize="18" DisplayMemberPath="Name"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <Image Height="300" Name="ImagePrev" Source="{Binding }" Width="300"/>
+            <Button Name="AddPhoto" Content="Добавить фото" HorizontalAlignment="Center" FontSize="18" Padding="10 5" Margin="5" Click="AddPhoto_Click"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5">
+            <Button Padding="10 5" Margin="5 0" FontSize="16" Content="Добавить" Name="BtnAdd" Click="BtnAdd_Click"/>
+            <Button Padding="10 5" Margin="5 0" FontSize="16" Content="Отмена" Name="Cancel" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
