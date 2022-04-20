@@ -4,14 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KojVenStatisticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AccessLevel">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="Хранилище KojVenStatisticModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appeal">
           <Key>
             <PropertyRef Name="Id" />
@@ -23,11 +16,11 @@
           <Property Name="DateOfRequest" Type="date" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Cabinet">
+        <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
@@ -41,6 +34,7 @@
           <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
           <Property Name="Snils" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MedPolis" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GenderId" Type="int" Nullable="false" />
         </EntityType>
@@ -67,13 +61,29 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="MedicamentOfDisease">
+          <Key>
+            <PropertyRef Name="MedicamentId" />
+            <PropertyRef Name="DiseaseId" />
+          </Key>
+          <Property Name="MedicamentId" Type="int" Nullable="false" />
+          <Property Name="DiseaseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicamentOfRecipe">
+          <Key>
+            <PropertyRef Name="MedicamentId" />
+            <PropertyRef Name="RecipeId" />
+          </Key>
+          <Property Name="MedicamentId" Type="int" Nullable="false" />
+          <Property Name="RecipeId" Type="int" Nullable="false" />
+          <Property Name="AmountPerDay" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PostName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -82,44 +92,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppealId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="MedicamentId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ReportOfTheDay">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="NumberOfRequests" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ReportOfTheMonth">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="NumberOfMonth" Type="int" Nullable="false" />
-          <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="NumberOfRequests" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ReportOfTheWeek">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="NumberOfWeek" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="NumberOfRequests" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ReportOfTheYear">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="NemberOfRequests" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
@@ -136,15 +108,13 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PostId" Type="int" Nullable="false" />
-          <Property Name="AccessLevelId" Type="int" Nullable="false" />
-          <Property Name="Experience" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Experience" Type="int" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GenderId" Type="int" Nullable="false" />
-          <Property Name="NumberPassport" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CabinetId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Appeal_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -206,6 +176,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MedicamentOfDisease_Disease">
+          <End Role="Disease" Type="Self.Disease" Multiplicity="1" />
+          <End Role="MedicamentOfDisease" Type="Self.MedicamentOfDisease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicamentOfDisease">
+              <PropertyRef Name="DiseaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicamentOfDisease_Medicament">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="MedicamentOfDisease" Type="Self.MedicamentOfDisease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicamentOfDisease">
+              <PropertyRef Name="MedicamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicamentOfRecipe_Medicament">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicamentOfRecipe">
+              <PropertyRef Name="MedicamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicamentOfRecipe_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicamentOfRecipe">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Recipe_Appeal">
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="1" />
           <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
@@ -218,87 +236,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Recipe_Medicament">
-          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medicament">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Recipe">
-              <PropertyRef Name="MedicamentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportOfTheDay_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheDay" Type="Self.ReportOfTheDay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheDay">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportOfTheMonth_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheMonth" Type="Self.ReportOfTheMonth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheMonth">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportOfTheWeek_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheWeek" Type="Self.ReportOfTheWeek" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheWeek">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportOfTheYear_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheYear" Type="Self.ReportOfTheYear" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheYear">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_AccessLevel">
-          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
+        <Association Name="FK_User_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AccessLevel">
+            <Principal Role="Category">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="AccessLevelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Cabinet">
-          <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cabinet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="CabinetId" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -326,20 +272,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="KojVenStatisticModelStoreContainer">
-          <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="Хранилище KojVenStatisticModelContainer">
           <EntitySet Name="Appeal" EntityType="Self.Appeal" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cabinet" EntityType="Self.Cabinet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disease" EntityType="Self.Disease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicament" EntityType="Self.Medicament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicamentOfDisease" EntityType="Self.MedicamentOfDisease" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicamentOfRecipe" EntityType="Self.MedicamentOfRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportOfTheDay" EntityType="Self.ReportOfTheDay" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportOfTheMonth" EntityType="Self.ReportOfTheMonth" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportOfTheWeek" EntityType="Self.ReportOfTheWeek" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportOfTheYear" EntityType="Self.ReportOfTheYear" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Appeal_Client" Association="Self.FK_Appeal_Client">
@@ -362,36 +305,28 @@
             <End Role="TypeDisease" EntitySet="TypeDisease" />
             <End Role="Disease" EntitySet="Disease" />
           </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfDisease_Disease" Association="Self.FK_MedicamentOfDisease_Disease">
+            <End Role="Disease" EntitySet="Disease" />
+            <End Role="MedicamentOfDisease" EntitySet="MedicamentOfDisease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfDisease_Medicament" Association="Self.FK_MedicamentOfDisease_Medicament">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="MedicamentOfDisease" EntitySet="MedicamentOfDisease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfRecipe_Medicament" Association="Self.FK_MedicamentOfRecipe_Medicament">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfRecipe_Recipe" Association="Self.FK_MedicamentOfRecipe_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
+          </AssociationSet>
           <AssociationSet Name="FK_Recipe_Appeal" Association="Self.FK_Recipe_Appeal">
             <End Role="Appeal" EntitySet="Appeal" />
             <End Role="Recipe" EntitySet="Recipe" />
           </AssociationSet>
-          <AssociationSet Name="FK_Recipe_Medicament" Association="Self.FK_Recipe_Medicament">
-            <End Role="Medicament" EntitySet="Medicament" />
-            <End Role="Recipe" EntitySet="Recipe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheDay_User" Association="Self.FK_ReportOfTheDay_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheDay" EntitySet="ReportOfTheDay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheMonth_User" Association="Self.FK_ReportOfTheMonth_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheMonth" EntitySet="ReportOfTheMonth" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheWeek_User" Association="Self.FK_ReportOfTheWeek_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheWeek" EntitySet="ReportOfTheWeek" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheYear_User" Association="Self.FK_ReportOfTheYear_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheYear" EntitySet="ReportOfTheYear" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_AccessLevel" Association="Self.FK_User_AccessLevel">
-            <End Role="AccessLevel" EntitySet="AccessLevel" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Cabinet" Association="Self.FK_User_Cabinet">
-            <End Role="Cabinet" EntitySet="Cabinet" />
+          <AssociationSet Name="FK_User_Category" Association="Self.FK_User_Category">
+            <End Role="Category" EntitySet="Category" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Gender" Association="Self.FK_User_Gender">
@@ -408,14 +343,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KojVenStatisticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AccessLevel">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_AccessLevel" FromRole="AccessLevel" ToRole="User" />
-        </EntityType>
         <EntityType Name="Appeal">
           <Key>
             <PropertyRef Name="Id" />
@@ -431,13 +358,13 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Appeal_User" FromRole="Appeal" ToRole="User" />
           <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_Appeal" FromRole="Appeal" ToRole="Recipe" />
         </EntityType>
-        <EntityType Name="Cabinet">
+        <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Cabinet" FromRole="Cabinet" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Category" FromRole="Category" ToRole="User" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -450,6 +377,7 @@
           <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Snils" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MedPolis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GenderId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appeal" Relationship="Self.FK_Appeal_Client" FromRole="Client" ToRole="Appeal" />
@@ -465,6 +393,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Appeal" Relationship="Self.FK_Appeal_Disease" FromRole="Disease" ToRole="Appeal" />
           <NavigationProperty Name="TypeDisease" Relationship="Self.FK_Disease_TypeDisease" FromRole="Disease" ToRole="TypeDisease" />
+          <NavigationProperty Name="Medicament" Relationship="Self.MedicamentOfDisease" FromRole="Disease" ToRole="Medicament" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -481,15 +410,26 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_Medicament" FromRole="Medicament" ToRole="Recipe" />
+          <NavigationProperty Name="MedicamentOfRecipe" Relationship="Self.FK_MedicamentOfRecipe_Medicament" FromRole="Medicament" ToRole="MedicamentOfRecipe" />
+          <NavigationProperty Name="Disease" Relationship="Self.MedicamentOfDisease" FromRole="Medicament" ToRole="Disease" />
+        </EntityType>
+        <EntityType Name="MedicamentOfRecipe">
+          <Key>
+            <PropertyRef Name="MedicamentId" />
+            <PropertyRef Name="RecipeId" />
+          </Key>
+          <Property Name="MedicamentId" Type="Int32" Nullable="false" />
+          <Property Name="RecipeId" Type="Int32" Nullable="false" />
+          <Property Name="AmountPerDay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicament" Relationship="Self.FK_MedicamentOfRecipe_Medicament" FromRole="MedicamentOfRecipe" ToRole="Medicament" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_MedicamentOfRecipe_Recipe" FromRole="MedicamentOfRecipe" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PostName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Post" FromRole="Post" ToRole="User" />
         </EntityType>
         <EntityType Name="Recipe">
@@ -499,50 +439,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppealId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="MedicamentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appeal" Relationship="Self.FK_Recipe_Appeal" FromRole="Recipe" ToRole="Appeal" />
-          <NavigationProperty Name="Medicament" Relationship="Self.FK_Recipe_Medicament" FromRole="Recipe" ToRole="Medicament" />
-        </EntityType>
-        <EntityType Name="ReportOfTheDay">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="NumberOfRequests" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ReportOfTheDay_User" FromRole="ReportOfTheDay" ToRole="User" />
-        </EntityType>
-        <EntityType Name="ReportOfTheMonth">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="NumberOfMonth" Type="Int32" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="NumberOfRequests" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ReportOfTheMonth_User" FromRole="ReportOfTheMonth" ToRole="User" />
-        </EntityType>
-        <EntityType Name="ReportOfTheWeek">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="NumberOfWeek" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="NumberOfRequests" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ReportOfTheWeek_User" FromRole="ReportOfTheWeek" ToRole="User" />
-        </EntityType>
-        <EntityType Name="ReportOfTheYear">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="NemberOfRequests" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ReportOfTheYear_User" FromRole="ReportOfTheYear" ToRole="User" />
+          <NavigationProperty Name="MedicamentOfRecipe" Relationship="Self.FK_MedicamentOfRecipe_Recipe" FromRole="Recipe" ToRole="MedicamentOfRecipe" />
         </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
@@ -560,37 +458,18 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PostId" Type="Int32" Nullable="false" />
-          <Property Name="AccessLevelId" Type="Int32" Nullable="false" />
-          <Property Name="Experience" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Experience" Type="Int32" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GenderId" Type="Int32" Nullable="false" />
-          <Property Name="NumberPassport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CabinetId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccessLevel" Relationship="Self.FK_User_AccessLevel" FromRole="User" ToRole="AccessLevel" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appeal" Relationship="Self.FK_Appeal_User" FromRole="User" ToRole="Appeal" />
-          <NavigationProperty Name="Cabinet" Relationship="Self.FK_User_Cabinet" FromRole="User" ToRole="Cabinet" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_User_Category" FromRole="User" ToRole="Category" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_User_Gender" FromRole="User" ToRole="Gender" />
           <NavigationProperty Name="Post" Relationship="Self.FK_User_Post" FromRole="User" ToRole="Post" />
-          <NavigationProperty Name="ReportOfTheDay" Relationship="Self.FK_ReportOfTheDay_User" FromRole="User" ToRole="ReportOfTheDay" />
-          <NavigationProperty Name="ReportOfTheMonth" Relationship="Self.FK_ReportOfTheMonth_User" FromRole="User" ToRole="ReportOfTheMonth" />
-          <NavigationProperty Name="ReportOfTheWeek" Relationship="Self.FK_ReportOfTheWeek_User" FromRole="User" ToRole="ReportOfTheWeek" />
-          <NavigationProperty Name="ReportOfTheYear" Relationship="Self.FK_ReportOfTheYear_User" FromRole="User" ToRole="ReportOfTheYear" />
         </EntityType>
-        <Association Name="FK_User_AccessLevel">
-          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccessLevel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="AccessLevelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Appeal_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
@@ -639,15 +518,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Cabinet">
-          <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+        <Association Name="FK_User_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cabinet">
+            <Principal Role="Category">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="CabinetId" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -687,15 +566,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Recipe_Medicament">
+        <Association Name="FK_MedicamentOfRecipe_Medicament">
           <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicament">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Recipe">
+            <Dependent Role="MedicamentOfRecipe">
               <PropertyRef Name="MedicamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicamentOfRecipe_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicamentOfRecipe">
+              <PropertyRef Name="RecipeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -711,74 +602,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReportOfTheDay_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheDay" Type="Self.ReportOfTheDay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheDay">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="MedicamentOfDisease">
+          <End Role="Disease" Type="Self.Disease" Multiplicity="*" />
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="*" />
         </Association>
-        <Association Name="FK_ReportOfTheMonth_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheMonth" Type="Self.ReportOfTheMonth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheMonth">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportOfTheWeek_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheWeek" Type="Self.ReportOfTheWeek" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheWeek">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportOfTheYear_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReportOfTheYear" Type="Self.ReportOfTheYear" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReportOfTheYear">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="KojVenStatisticEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" />
+        <EntityContainer Name="KojVenStatisticEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Appeal" EntityType="Self.Appeal" />
-          <EntitySet Name="Cabinet" EntityType="Self.Cabinet" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Disease" EntityType="Self.Disease" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
           <EntitySet Name="Medicament" EntityType="Self.Medicament" />
+          <EntitySet Name="MedicamentOfRecipe" EntityType="Self.MedicamentOfRecipe" />
           <EntitySet Name="Post" EntityType="Self.Post" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" />
-          <EntitySet Name="ReportOfTheDay" EntityType="Self.ReportOfTheDay" />
-          <EntitySet Name="ReportOfTheMonth" EntityType="Self.ReportOfTheMonth" />
-          <EntitySet Name="ReportOfTheWeek" EntityType="Self.ReportOfTheWeek" />
-          <EntitySet Name="ReportOfTheYear" EntityType="Self.ReportOfTheYear" />
           <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_User_AccessLevel" Association="Self.FK_User_AccessLevel">
-            <End Role="AccessLevel" EntitySet="AccessLevel" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_Appeal_Client" Association="Self.FK_Appeal_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Appeal" EntitySet="Appeal" />
@@ -795,8 +634,8 @@
             <End Role="Appeal" EntitySet="Appeal" />
             <End Role="Recipe" EntitySet="Recipe" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Cabinet" Association="Self.FK_User_Cabinet">
-            <End Role="Cabinet" EntitySet="Cabinet" />
+          <AssociationSet Name="FK_User_Category" Association="Self.FK_User_Category">
+            <End Role="Category" EntitySet="Category" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
@@ -811,29 +650,21 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_Recipe_Medicament" Association="Self.FK_Recipe_Medicament">
+          <AssociationSet Name="FK_MedicamentOfRecipe_Medicament" Association="Self.FK_MedicamentOfRecipe_Medicament">
             <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfRecipe_Recipe" Association="Self.FK_MedicamentOfRecipe_Recipe">
             <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Post" Association="Self.FK_User_Post">
             <End Role="Post" EntitySet="Post" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheDay_User" Association="Self.FK_ReportOfTheDay_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheDay" EntitySet="ReportOfTheDay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheMonth_User" Association="Self.FK_ReportOfTheMonth_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheMonth" EntitySet="ReportOfTheMonth" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheWeek_User" Association="Self.FK_ReportOfTheWeek_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheWeek" EntitySet="ReportOfTheWeek" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportOfTheYear_User" Association="Self.FK_ReportOfTheYear_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="ReportOfTheYear" EntitySet="ReportOfTheYear" />
+          <AssociationSet Name="MedicamentOfDisease" Association="Self.MedicamentOfDisease">
+            <End Role="Disease" EntitySet="Disease" />
+            <End Role="Medicament" EntitySet="Medicament" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -841,15 +672,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="KojVenStatisticModelStoreContainer" CdmEntityContainer="KojVenStatisticEntities3">
-          <EntitySetMapping Name="AccessLevel">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.AccessLevel">
-              <MappingFragment StoreEntitySet="AccessLevel">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="Хранилище KojVenStatisticModelContainer" CdmEntityContainer="KojVenStatisticEntities">
           <EntitySetMapping Name="Appeal">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Appeal">
               <MappingFragment StoreEntitySet="Appeal">
@@ -862,9 +685,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cabinet">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.Cabinet">
-              <MappingFragment StoreEntitySet="Cabinet">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="KojVenStatisticModel.Category">
+              <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -880,6 +703,7 @@
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Snils" ColumnName="Snils" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="MedPolis" ColumnName="MedPolis" />
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
               </MappingFragment>
@@ -911,12 +735,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MedicamentOfRecipe">
+            <EntityTypeMapping TypeName="KojVenStatisticModel.MedicamentOfRecipe">
+              <MappingFragment StoreEntitySet="MedicamentOfRecipe">
+                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+                <ScalarProperty Name="AmountPerDay" ColumnName="AmountPerDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Post">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Post">
               <MappingFragment StoreEntitySet="Post">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PostName" ColumnName="PostName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -926,48 +758,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AppealId" ColumnName="AppealId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportOfTheDay">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.ReportOfTheDay">
-              <MappingFragment StoreEntitySet="ReportOfTheDay">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="NumberOfRequests" ColumnName="NumberOfRequests" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportOfTheMonth">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.ReportOfTheMonth">
-              <MappingFragment StoreEntitySet="ReportOfTheMonth">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NumberOfMonth" ColumnName="NumberOfMonth" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="NumberOfRequests" ColumnName="NumberOfRequests" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportOfTheWeek">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.ReportOfTheWeek">
-              <MappingFragment StoreEntitySet="ReportOfTheWeek">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NumberOfWeek" ColumnName="NumberOfWeek" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="NumberOfRequests" ColumnName="NumberOfRequests" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportOfTheYear">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.ReportOfTheYear">
-              <MappingFragment StoreEntitySet="ReportOfTheYear">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="NemberOfRequests" ColumnName="NemberOfRequests" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,18 +776,24 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
-                <ScalarProperty Name="AccessLevelId" ColumnName="AccessLevelId" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-                <ScalarProperty Name="NumberPassport" ColumnName="NumberPassport" />
-                <ScalarProperty Name="CabinetId" ColumnName="CabinetId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="MedicamentOfDisease" TypeName="KojVenStatisticModel.MedicamentOfDisease" StoreEntitySet="MedicamentOfDisease">
+            <EndProperty Name="Disease">
+              <ScalarProperty Name="Id" ColumnName="DiseaseId" />
+            </EndProperty>
+            <EndProperty Name="Medicament">
+              <ScalarProperty Name="Id" ColumnName="MedicamentId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1015,7 +811,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

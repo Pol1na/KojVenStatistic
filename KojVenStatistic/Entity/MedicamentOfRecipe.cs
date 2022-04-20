@@ -12,18 +12,13 @@ namespace KojVenStatistic.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Medicament
+    public partial class MedicamentOfRecipe
     {
-        public Medicament()
-        {
-            this.MedicamentOfRecipe = new HashSet<MedicamentOfRecipe>();
-            this.Disease = new HashSet<Disease>();
-        }
+        public int MedicamentId { get; set; }
+        public int RecipeId { get; set; }
+        public int AmountPerDay { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<MedicamentOfRecipe> MedicamentOfRecipe { get; set; }
-        public virtual ICollection<Disease> Disease { get; set; }
+        public virtual Medicament Medicament { get; set; }
+        public virtual Recipe Recipe { get; set; }
     }
 }

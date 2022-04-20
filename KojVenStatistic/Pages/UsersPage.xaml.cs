@@ -24,7 +24,40 @@ namespace KojVenStatistic.Pages
         public UsersPage()
         {
             InitializeComponent();
-            DGUsers.ItemsSource = AppData.Context.User.ToList();
+            List<Category> categories = AppData.Context.Category.ToList();
+            categories.Insert(0, new Category { Name = "Все специальности" });
+            CBoxCategories.ItemsSource = categories;
+            CBoxCategories.SelectedIndex = 0;
+        }
+
+        private void TBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateGrid();
+        }
+        private void UpdateGrid()
+        {
+            List<User> users = AppData.Context.User.ToList();
+
+            string text = TBoxSearch.Text.ToLower();
+            if (!string.IsNullOrWhiteSpace(text))
+                users = users.Where(x => x.FirstName.ToLower().Contains(text) || x.LastName.ToLower().Contains(text) || x.Email.ToLower().Contains(text) || x.Login.ToLower().Contains(text)).ToList();
+            if(CBoxCategories.SelectedIndex != 0)
+                users = users.Where(x => x.Category == CBoxCategories.SelectedItem).ToList();
+
+            DGUsers.ItemsSource = users;
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateGrid();
+            if (string.IsNullOrEmpty(TBoxSearch.Text))
+            {
+                TBlockPlaceholer.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TBlockPlaceholer.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

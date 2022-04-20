@@ -6,33 +6,41 @@
       xmlns:local="clr-namespace:KojVenStatistic.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="NavigationPage">
+      Title="{Binding ElementName=PageFrame, Path=Content.Title}">
 
     <Grid>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="180"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <Border Background="Green"  BorderBrush="DarkSeaGreen" BorderThickness="2">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Name="User" FontSize="16" Margin="10,5" HorizontalAlignment="Left"/>
-                    <Ellipse  Height="50" Stroke="DarkSeaGreen" StrokeThickness="2" Margin="2" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Name="Ellipse"/>
+        <Grid Background="{DynamicResource ActiveGreen}">
+            <Image Source="/Assets/logo.png" Margin="5"/>
+        </Grid>
 
-                </StackPanel>
-                <Button Content ="Пользователи" Name="UsersBtn" Click="UsersBtn_Click"  FontSize="20" Margin="5"/>
-                <Button Content ="Клиенты"  Name="ClientsBtn"   FontSize="20" Margin="5" Click="ClientsBtn_Click"/>
-                <Button Content ="Медикаменты" Name="MedBtn" FontSize="20" Margin="5" Click="MedBtn_Click"/>
-                <Button Content="Заболевания" Name="DesBtn" FontSize="20" Margin="5"/>
-                <Button Content="Прием" Name="MeetBtn" FontSize="20" Margin="5"/>
+        <Grid Background="{DynamicResource MainGreen}" Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0 50 0 10">
+                <DockPanel>
+                    <RadioButton Content="Пользователи" Style="{StaticResource RBtnCute}" GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnUsers"  Click="BtnUsers_Click" IsChecked="True" />
+                    <RadioButton Content="Пациенты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnClients" Click="BtnClients_Click"/>
+                    <RadioButton Content="Медикаменты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnMedicaments" Click="BtnMedicaments_Click" />
+                    <RadioButton Content="Выход" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Bottom" x:Name="BtnExit" Click="BtnExit_Click" />
+                    <Grid Background="{DynamicResource MainGreen}"/>
+                </DockPanel>
+            </ScrollViewer>
+        </Grid>
 
-            </StackPanel>
-        </Border>
-        <Border Grid.Column="2">
-            <Frame Grid.Column="1" Name="PageFrame" Background="LightGreen" BorderBrush="DarkSeaGreen" BorderThickness="2">
+        <Grid  Grid.Column="1" Background="{DynamicResource MainGreen}">
+            <TextBlock Text="{Binding ElementName=PageFrame,Path=Content.Title}" Style="{StaticResource TBlockHeader}"/>
+        </Grid>
 
-            </Frame>
-        </Border>
+        <Frame Grid.Column="1" Grid.Row="1" x:Name="PageFrame" NavigationUIVisibility="Hidden">
+
+        </Frame>
     </Grid>
 </Page>

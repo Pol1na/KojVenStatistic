@@ -4,6 +4,104 @@
              xmlns:local="clr-namespace:KojVenStatistic"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+            <SolidColorBrush Color="DarkGreen" x:Key="MainGreen"/>
+            <SolidColorBrush Color="Green" x:Key="SecondaryGreen"/>
+            <SolidColorBrush Color="#FF389538" x:Key="ActiveGreen"/>
+            <SolidColorBrush Color="DarkSeaGreen" x:Key="UnactiveGreen"/>
+            <SolidColorBrush Color="#FFEEFFF0" x:Key="BackgroundColor"/>
+            <SolidColorBrush Color="Black" x:Key="TextColor"/>
+            <SolidColorBrush Color="#4C4C4C" x:Key="MainGray"/>
+            <SolidColorBrush Color="#807E7D" x:Key="SecondaryGray"/>
+            <SolidColorBrush Color="#D9343F" x:Key="MainRed"/>
+
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+            </Style>
+
+            <Style TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource MainGreen}"/>
+                <Setter Property="Padding" Value="10 5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"
+                                BorderThickness="0" CornerRadius="5">
+                                <TextBlock Text="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource SecondaryGreen}"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource ActiveGreen}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource UnactiveGreen}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <Style TargetType="RadioButton" x:Key="RBtnCute">
+                <Setter Property="Background" Value="{DynamicResource MainGreen}"/>
+                <Setter Property="Padding" Value="10 5"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"
+                                BorderThickness="0" CornerRadius="5">
+                                <TextBlock Text="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource SecondaryGreen}"/>
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource ActiveGreen}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource UnactiveGreen}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+            </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        </Style>
+
+
+        <Style TargetType="TextBlock" x:Key="TBlockHeader">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
     </Application.Resources>
 </Application>

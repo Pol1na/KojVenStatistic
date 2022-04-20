@@ -25,11 +25,11 @@ namespace KojVenStatistic.Pages
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var result = AppData.Context.User.ToList().FirstOrDefault(P => P.Login == textBox1.Text && P.Password == textBox2.Text);
+                var result = AppData.Context.User.ToList().FirstOrDefault(P => P.Login == TBoxLogin.Text && P.Password == TBoxPassword.Text);
                 if (result != null)
                 {
                     Properties.Settings.Default.UserId = result.Id;

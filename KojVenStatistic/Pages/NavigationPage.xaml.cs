@@ -21,27 +21,30 @@ namespace KojVenStatistic.Pages
     /// </summary>
     public partial class NavigationPage : Page
     {
-        User users;
+        User user;
         public NavigationPage()
         {
             InitializeComponent();
-            users = AppData.Context.User.FirstOrDefault(P => P.Id == Properties.Settings.Default.UserId);
-            User.Text = users.LastName + " " + users.FirstName;
-           // Ellipse.Fill = users.Photo;
-            //PageFrame.Navigate(new UsersPage());
+            user = AppData.Context.User.FirstOrDefault(P => P.Id == Properties.Settings.Default.UserId);
+            PageFrame.Navigate(new UsersPage());
+
+        }
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage());
         }
 
-        private void UsersBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnUsers_Click(object sender, RoutedEventArgs e)
         {
             PageFrame.Navigate(new UsersPage());
         }
 
-        private void ClientsBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnClients_Click(object sender, RoutedEventArgs e)
         {
             PageFrame.Navigate(new ClientsPage());
         }
 
-        private void MedBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnMedicaments_Click(object sender, RoutedEventArgs e)
         {
             PageFrame.Navigate(new MedicamentsPage());
         }

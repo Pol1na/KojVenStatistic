@@ -10,6 +10,6 @@ namespace KojVenStatistic
     public class AppData
     {
         public static Frame MainFrame;
-        public static Entity.KojVenStatisticEntities3 Context = new Entity.KojVenStatisticEntities3();
+        public static Entity.KojVenStatisticEntities Context = new Entity.KojVenStatisticEntities();
     }
 }
