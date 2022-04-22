@@ -12,25 +12,54 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
+        <ListView Grid.Row="1" Margin="10" Name="LViewClients" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="False" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="5" Background="{DynamicResource BackgroundColor}" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Margin="5">
+                        <Grid Width="500">
+                            <StackPanel >
+                                <TextBlock Text="{Binding FullName}" FontSize="20" Margin="5" />
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="СНИЛС: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding Snils}" Foreground="Gray"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="Мед.полис: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding MedPolis}" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
 
+                            <StackPanel HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding DateOfBirthText}" FontSize="20" Margin="5" />
+                                <Button Content="Подробнее" Width="120" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-        <DataGrid Grid.Row="1" Margin="10" Name="DGClients" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id клиента" Binding="{Binding Id}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding NumberPassport}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Адрес" Binding="{Binding Adress}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Снилс" Binding="{Binding Snils}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Мед.полис" Binding="{Binding MedPolis}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Name}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Фото" Binding="{Binding Photo}" Width="auto"></DataGridTextColumn>
-            </DataGrid.Columns>
+        <Grid Background="White" Width="170" Margin="10"  HorizontalAlignment="Left">
+            <TextBlock Text="Поиск..." Margin="3 1" VerticalAlignment="Center" Foreground="Gray" x:Name="TBlockPlaceholer"/>
+            <TextBox x:Name="TBoxSearch" Background="Transparent" TextChanged="TBoxSearch_TextChanged" VerticalContentAlignment="Center"></TextBox>
+        </Grid>
 
-        </DataGrid>
-
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <TextBlock Text="Сортировка:" VerticalAlignment="Center"/>
+            <ComboBox Width="170" Margin="10" x:Name="CBoxSort" SelectionChanged="CBoxSort_SelectionChanged"/>
+        </StackPanel>
     </Grid>
 </Page>

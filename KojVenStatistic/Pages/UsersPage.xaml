@@ -28,8 +28,7 @@
         <DataGrid Grid.Row="1" Margin="10,10,10,10" Name="DGUsers" AutoGenerateColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Код" Binding="{Binding Id}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Полное имя" Binding="{Binding FullName}" Width="auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Должность" Binding="{Binding Post.Name}" Width="auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Специальность" Binding="{Binding Category.Name}" Width="auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Стаж работы" Binding="{Binding Experience}" Width="auto"></DataGridTextColumn>

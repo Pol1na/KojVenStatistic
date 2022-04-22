@@ -20,7 +20,7 @@ namespace KojVenStatistic.Entity
         }
     
         public int Id { get; set; }
-        public int ClientId { get; set; }
+        public string ClientSnils { get; set; }
         public int UserId { get; set; }
         public int DiseaseId { get; set; }
         public System.DateTime DateOfRequest { get; set; }

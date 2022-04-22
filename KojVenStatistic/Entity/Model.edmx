@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище KojVenStatisticModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище KojVenStatisticModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appeal">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientSnils" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="DiseaseId" Type="int" Nullable="false" />
           <Property Name="DateOfRequest" Type="date" Nullable="false" />
@@ -25,17 +25,17 @@
         </EntityType>
         <EntityType Name="Client">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Snils" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Snils" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NumberPassport" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PassportNumber" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="PassportSeria" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="Snils" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telephone" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="MedPolis" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="MedPolis" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="GenderId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Disease">
@@ -115,16 +115,17 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GenderId" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Appeal_Client">
+        <Association Name="FK_Appeal_Client1">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Snils" />
             </Principal>
             <Dependent Role="Appeal">
-              <PropertyRef Name="ClientId" />
+              <PropertyRef Name="ClientSnils" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -285,7 +286,7 @@
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Appeal_Client" Association="Self.FK_Appeal_Client">
+          <AssociationSet Name="FK_Appeal_Client1" Association="Self.FK_Appeal_Client1">
             <End Role="Client" EntitySet="Client" />
             <End Role="Appeal" EntitySet="Appeal" />
           </AssociationSet>
@@ -338,80 +339,140 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KojVenStatisticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KojVenStatisticEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appeal" EntityType="KojVenStatisticModel.Appeal" />
+          <EntitySet Name="Category" EntityType="KojVenStatisticModel.Category" />
+          <EntitySet Name="Client" EntityType="KojVenStatisticModel.Client" />
+          <EntitySet Name="Disease" EntityType="KojVenStatisticModel.Disease" />
+          <EntitySet Name="Gender" EntityType="KojVenStatisticModel.Gender" />
+          <EntitySet Name="Medicament" EntityType="KojVenStatisticModel.Medicament" />
+          <EntitySet Name="MedicamentOfRecipe" EntityType="KojVenStatisticModel.MedicamentOfRecipe" />
+          <EntitySet Name="Post" EntityType="KojVenStatisticModel.Post" />
+          <EntitySet Name="Recipe" EntityType="KojVenStatisticModel.Recipe" />
+          <EntitySet Name="TypeDisease" EntityType="KojVenStatisticModel.TypeDisease" />
+          <EntitySet Name="User" EntityType="KojVenStatisticModel.User" />
+          <AssociationSet Name="FK_Appeal_Client1" Association="KojVenStatisticModel.FK_Appeal_Client1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Appeal" EntitySet="Appeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appeal_Disease" Association="KojVenStatisticModel.FK_Appeal_Disease">
+            <End Role="Disease" EntitySet="Disease" />
+            <End Role="Appeal" EntitySet="Appeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appeal_User" Association="KojVenStatisticModel.FK_Appeal_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Appeal" EntitySet="Appeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Appeal" Association="KojVenStatisticModel.FK_Recipe_Appeal">
+            <End Role="Appeal" EntitySet="Appeal" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Category" Association="KojVenStatisticModel.FK_User_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Gender" Association="KojVenStatisticModel.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disease_TypeDisease" Association="KojVenStatisticModel.FK_Disease_TypeDisease">
+            <End Role="TypeDisease" EntitySet="TypeDisease" />
+            <End Role="Disease" EntitySet="Disease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Gender" Association="KojVenStatisticModel.FK_User_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfRecipe_Medicament" Association="KojVenStatisticModel.FK_MedicamentOfRecipe_Medicament">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicamentOfRecipe_Recipe" Association="KojVenStatisticModel.FK_MedicamentOfRecipe_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Post" Association="KojVenStatisticModel.FK_User_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="MedicamentOfDisease" Association="KojVenStatisticModel.MedicamentOfDisease">
+            <End Role="Disease" EntitySet="Disease" />
+            <End Role="Medicament" EntitySet="Medicament" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Appeal">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientSnils" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="DiseaseId" Type="Int32" Nullable="false" />
           <Property Name="DateOfRequest" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Appeal_Client" FromRole="Appeal" ToRole="Client" />
-          <NavigationProperty Name="Disease" Relationship="Self.FK_Appeal_Disease" FromRole="Appeal" ToRole="Disease" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Appeal_User" FromRole="Appeal" ToRole="User" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_Appeal" FromRole="Appeal" ToRole="Recipe" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="KojVenStatisticModel.FK_Appeal_Client1" FromRole="Appeal" ToRole="Client" />
+          <NavigationProperty Name="Disease" Relationship="KojVenStatisticModel.FK_Appeal_Disease" FromRole="Appeal" ToRole="Disease" />
+          <NavigationProperty Name="User" Relationship="KojVenStatisticModel.FK_Appeal_User" FromRole="Appeal" ToRole="User" />
+          <NavigationProperty Name="Recipe" Relationship="KojVenStatisticModel.FK_Recipe_Appeal" FromRole="Appeal" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Category" FromRole="Category" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="KojVenStatisticModel.FK_User_Category" FromRole="Category" ToRole="User" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Snils" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NumberPassport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Snils" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="PassportSeria" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Snils" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MedPolis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="MedPolis" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="GenderId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Appeal" Relationship="Self.FK_Appeal_Client" FromRole="Client" ToRole="Appeal" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Appeal_Client1" FromRole="Client" ToRole="Appeal" />
+          <NavigationProperty Name="Gender" Relationship="KojVenStatisticModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
         </EntityType>
         <EntityType Name="Disease">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TypeDiseaseId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Appeal" Relationship="Self.FK_Appeal_Disease" FromRole="Disease" ToRole="Appeal" />
-          <NavigationProperty Name="TypeDisease" Relationship="Self.FK_Disease_TypeDisease" FromRole="Disease" ToRole="TypeDisease" />
-          <NavigationProperty Name="Medicament" Relationship="Self.MedicamentOfDisease" FromRole="Disease" ToRole="Medicament" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Appeal_Disease" FromRole="Disease" ToRole="Appeal" />
+          <NavigationProperty Name="TypeDisease" Relationship="KojVenStatisticModel.FK_Disease_TypeDisease" FromRole="Disease" ToRole="TypeDisease" />
+          <NavigationProperty Name="Medicament" Relationship="KojVenStatisticModel.MedicamentOfDisease" FromRole="Disease" ToRole="Medicament" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Gender" FromRole="Gender" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="KojVenStatisticModel.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+          <NavigationProperty Name="User" Relationship="KojVenStatisticModel.FK_User_Gender" FromRole="Gender" ToRole="User" />
         </EntityType>
         <EntityType Name="Medicament">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MedicamentOfRecipe" Relationship="Self.FK_MedicamentOfRecipe_Medicament" FromRole="Medicament" ToRole="MedicamentOfRecipe" />
-          <NavigationProperty Name="Disease" Relationship="Self.MedicamentOfDisease" FromRole="Medicament" ToRole="Disease" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MedicamentOfRecipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Medicament" FromRole="Medicament" ToRole="MedicamentOfRecipe" />
+          <NavigationProperty Name="Disease" Relationship="KojVenStatisticModel.MedicamentOfDisease" FromRole="Medicament" ToRole="Disease" />
         </EntityType>
         <EntityType Name="MedicamentOfRecipe">
           <Key>
@@ -421,16 +482,16 @@
           <Property Name="MedicamentId" Type="Int32" Nullable="false" />
           <Property Name="RecipeId" Type="Int32" Nullable="false" />
           <Property Name="AmountPerDay" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Medicament" Relationship="Self.FK_MedicamentOfRecipe_Medicament" FromRole="MedicamentOfRecipe" ToRole="Medicament" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_MedicamentOfRecipe_Recipe" FromRole="MedicamentOfRecipe" ToRole="Recipe" />
+          <NavigationProperty Name="Medicament" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Medicament" FromRole="MedicamentOfRecipe" ToRole="Medicament" />
+          <NavigationProperty Name="Recipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Recipe" FromRole="MedicamentOfRecipe" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Post" FromRole="Post" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="KojVenStatisticModel.FK_User_Post" FromRole="Post" ToRole="User" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -439,52 +500,53 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppealId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Appeal" Relationship="Self.FK_Recipe_Appeal" FromRole="Recipe" ToRole="Appeal" />
-          <NavigationProperty Name="MedicamentOfRecipe" Relationship="Self.FK_MedicamentOfRecipe_Recipe" FromRole="Recipe" ToRole="MedicamentOfRecipe" />
+          <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Recipe_Appeal" FromRole="Recipe" ToRole="Appeal" />
+          <NavigationProperty Name="MedicamentOfRecipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Recipe" FromRole="Recipe" ToRole="MedicamentOfRecipe" />
         </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Disease" Relationship="Self.FK_Disease_TypeDisease" FromRole="TypeDisease" ToRole="Disease" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Disease" Relationship="KojVenStatisticModel.FK_Disease_TypeDisease" FromRole="TypeDisease" ToRole="Disease" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PostId" Type="Int32" Nullable="false" />
           <Property Name="Experience" Type="Int32" Nullable="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GenderId" Type="Int32" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Appeal" Relationship="Self.FK_Appeal_User" FromRole="User" ToRole="Appeal" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_User_Category" FromRole="User" ToRole="Category" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_User_Gender" FromRole="User" ToRole="Gender" />
-          <NavigationProperty Name="Post" Relationship="Self.FK_User_Post" FromRole="User" ToRole="Post" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Appeal_User" FromRole="User" ToRole="Appeal" />
+          <NavigationProperty Name="Category" Relationship="KojVenStatisticModel.FK_User_Category" FromRole="User" ToRole="Category" />
+          <NavigationProperty Name="Gender" Relationship="KojVenStatisticModel.FK_User_Gender" FromRole="User" ToRole="Gender" />
+          <NavigationProperty Name="Post" Relationship="KojVenStatisticModel.FK_User_Post" FromRole="User" ToRole="Post" />
         </EntityType>
-        <Association Name="FK_Appeal_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
+        <Association Name="FK_Appeal_Client1">
+          <End Type="KojVenStatisticModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Snils" />
             </Principal>
             <Dependent Role="Appeal">
-              <PropertyRef Name="ClientId" />
+              <PropertyRef Name="ClientSnils" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Disease">
-          <End Role="Disease" Type="Self.Disease" Multiplicity="1" />
-          <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disease">
               <PropertyRef Name="Id" />
@@ -495,8 +557,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -507,8 +569,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipe_Appeal">
-          <End Role="Appeal" Type="Self.Appeal" Multiplicity="1" />
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Appeal">
               <PropertyRef Name="Id" />
@@ -519,8 +581,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
@@ -531,8 +593,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Client_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Client" Role="Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="Id" />
@@ -543,8 +605,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Disease_TypeDisease">
-          <End Role="TypeDisease" Type="Self.TypeDisease" Multiplicity="1" />
-          <End Role="Disease" Type="Self.Disease" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.TypeDisease" Role="TypeDisease" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeDisease">
               <PropertyRef Name="Id" />
@@ -555,8 +617,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="Id" />
@@ -567,8 +629,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Medicament">
-          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
-          <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.MedicamentOfRecipe" Role="MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicament">
               <PropertyRef Name="Id" />
@@ -579,8 +641,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.MedicamentOfRecipe" Role="MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="Id" />
@@ -591,8 +653,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Post">
-          <End Role="Post" Type="Self.Post" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Post">
               <PropertyRef Name="Id" />
@@ -603,71 +665,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MedicamentOfDisease">
-          <End Role="Disease" Type="Self.Disease" Multiplicity="*" />
-          <End Role="Medicament" Type="Self.Medicament" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="KojVenStatisticEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Appeal" EntityType="Self.Appeal" />
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="Disease" EntityType="Self.Disease" />
-          <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="Medicament" EntityType="Self.Medicament" />
-          <EntitySet Name="MedicamentOfRecipe" EntityType="Self.MedicamentOfRecipe" />
-          <EntitySet Name="Post" EntityType="Self.Post" />
-          <EntitySet Name="Recipe" EntityType="Self.Recipe" />
-          <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Appeal_Client" Association="Self.FK_Appeal_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Appeal" EntitySet="Appeal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Appeal_Disease" Association="Self.FK_Appeal_Disease">
-            <End Role="Disease" EntitySet="Disease" />
-            <End Role="Appeal" EntitySet="Appeal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Appeal_User" Association="Self.FK_Appeal_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Appeal" EntitySet="Appeal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recipe_Appeal" Association="Self.FK_Recipe_Appeal">
-            <End Role="Appeal" EntitySet="Appeal" />
-            <End Role="Recipe" EntitySet="Recipe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Category" Association="Self.FK_User_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disease_TypeDisease" Association="Self.FK_Disease_TypeDisease">
-            <End Role="TypeDisease" EntitySet="TypeDisease" />
-            <End Role="Disease" EntitySet="Disease" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Gender" Association="Self.FK_User_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedicamentOfRecipe_Medicament" Association="Self.FK_MedicamentOfRecipe_Medicament">
-            <End Role="Medicament" EntitySet="Medicament" />
-            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedicamentOfRecipe_Recipe" Association="Self.FK_MedicamentOfRecipe_Recipe">
-            <End Role="Recipe" EntitySet="Recipe" />
-            <End Role="MedicamentOfRecipe" EntitySet="MedicamentOfRecipe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Post" Association="Self.FK_User_Post">
-            <End Role="Post" EntitySet="Post" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="MedicamentOfDisease" Association="Self.MedicamentOfDisease">
-            <End Role="Disease" EntitySet="Disease" />
-            <End Role="Medicament" EntitySet="Medicament" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -676,122 +677,123 @@
           <EntitySetMapping Name="Appeal">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Appeal">
               <MappingFragment StoreEntitySet="Appeal">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
-                <ScalarProperty Name="DateOfRequest" ColumnName="DateOfRequest" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DateOfRequest" ColumnName="DateOfRequest" />
+                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClientSnils" ColumnName="ClientSnils" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="NumberPassport" ColumnName="NumberPassport" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Snils" ColumnName="Snils" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="MedPolis" ColumnName="MedPolis" />
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="MedPolis" ColumnName="MedPolis" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PassportSeria" ColumnName="PassportSeria" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Snils" ColumnName="Snils" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Disease">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Disease">
               <MappingFragment StoreEntitySet="Disease">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TypeDiseaseId" ColumnName="TypeDiseaseId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeDiseaseId" ColumnName="TypeDiseaseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gender">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Medicament">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Medicament">
               <MappingFragment StoreEntitySet="Medicament">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MedicamentOfRecipe">
             <EntityTypeMapping TypeName="KojVenStatisticModel.MedicamentOfRecipe">
               <MappingFragment StoreEntitySet="MedicamentOfRecipe">
-                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
-                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
                 <ScalarProperty Name="AmountPerDay" ColumnName="AmountPerDay" />
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Post">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Post">
               <MappingFragment StoreEntitySet="Post">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipe">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Recipe">
               <MappingFragment StoreEntitySet="Recipe">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AppealId" ColumnName="AppealId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="AppealId" ColumnName="AppealId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeDisease">
             <EntityTypeMapping TypeName="KojVenStatisticModel.TypeDisease">
               <MappingFragment StoreEntitySet="TypeDisease">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="KojVenStatisticModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="PostId" ColumnName="PostId" />
-                <ScalarProperty Name="Experience" ColumnName="Experience" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="MedicamentOfDisease" TypeName="KojVenStatisticModel.MedicamentOfDisease" StoreEntitySet="MedicamentOfDisease">
-            <EndProperty Name="Disease">
-              <ScalarProperty Name="Id" ColumnName="DiseaseId" />
-            </EndProperty>
             <EndProperty Name="Medicament">
               <ScalarProperty Name="Id" ColumnName="MedicamentId" />
+            </EndProperty>
+            <EndProperty Name="Disease">
+              <ScalarProperty Name="Id" ColumnName="DiseaseId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

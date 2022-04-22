@@ -24,7 +24,53 @@ namespace KojVenStatistic.Pages
         public ClientsPage()
         {
             InitializeComponent();
-            DGClients.ItemsSource = AppData.Context.Client.ToList();
+            CBoxSort.ItemsSource = new string[] { "Без сортировки", "По имени (возр.)", "По имени (убыв.)", "По дате рождения (возр.)", "По дате рождения (убыв.)" };
+            CBoxSort.SelectedIndex = 0;
+        }
+
+        private void UpdateList()
+        {
+            List<Client> clients = AppData.Context.Client.ToList();
+
+            string text = TBoxSearch.Text.ToLower();
+            if (!string.IsNullOrWhiteSpace(text))
+                clients = clients.Where(x => x.FullName.ToLower().Contains(text) || x.MedPolis.ToLower().Contains(text) || x.Snils.ToLower().Contains(text)).ToList();
+
+            switch (CBoxSort.SelectedIndex)
+            {
+                case 1:
+                    clients = clients.OrderBy(x => x.FullName).ToList();
+                    break;
+                case 2:
+                    clients = clients.OrderByDescending(x => x.FullName).ToList();
+                    break;
+                case 3:
+                    clients = clients.OrderBy(x => x.DateOfBirth).ToList();
+                    break;
+                case 4:
+                    clients = clients.OrderByDescending(x => x.DateOfBirth).ToList();
+                    break;
+                default:
+                    break;
+            }
+
+
+            LViewClients.ItemsSource = clients;
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateList();
+
+            if(!string.IsNullOrEmpty(TBoxSearch.Text))
+                TBlockPlaceholer.Visibility = Visibility.Collapsed;
+            else
+                TBlockPlaceholer.Visibility = Visibility.Visible;
+        }
+
+        private void CBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateList();
         }
     }
 }

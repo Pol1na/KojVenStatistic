@@ -21,12 +21,45 @@ namespace KojVenStatistic.Pages
     /// </summary>
     public partial class NavigationPage : Page
     {
-        User user;
+        private User _user;
         public NavigationPage()
         {
             InitializeComponent();
-            user = AppData.Context.User.FirstOrDefault(P => P.Id == Properties.Settings.Default.UserId);
-            PageFrame.Navigate(new UsersPage());
+            _user = AppData.Context.User.FirstOrDefault(P => P.Id == Properties.Settings.Default.UserId);
+            UserInfo.DataContext = _user;
+
+            BtnAppeal.Visibility = Visibility.Collapsed;
+            BtnInfo.Visibility = Visibility.Collapsed;
+            BtnClients.Visibility = Visibility.Collapsed;
+            BtnMedicaments.Visibility = Visibility.Collapsed;
+            BtnUsers.Visibility = Visibility.Collapsed;
+
+            switch (_user.PostId)
+            {
+                case 1:
+                    BtnUsers.Visibility = Visibility.Visible;
+                    BtnClients.Visibility = Visibility.Visible;
+                    BtnMedicaments.Visibility = Visibility.Visible;
+                    PageFrame.Navigate(new UsersPage());
+                    BtnUsers.IsChecked = true;
+                    break;
+                case 2:
+                    BtnClients.Visibility = Visibility.Visible;
+                    BtnMedicaments.Visibility = Visibility.Visible;
+                    PageFrame.Navigate(new ClientsPage());
+                    BtnClients.IsChecked = true;
+                    break;
+                case 3:
+                    BtnAppeal.Visibility = Visibility.Visible;
+                    BtnInfo.Visibility = Visibility.Visible;
+                    PageFrame.Navigate(new AppealPage());
+                    BtnAppeal.IsChecked = true;
+                    break;
+                default:
+                    break;
+            }
+
+           
 
         }
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -47,6 +80,16 @@ namespace KojVenStatistic.Pages
         private void BtnMedicaments_Click(object sender, RoutedEventArgs e)
         {
             PageFrame.Navigate(new MedicamentsPage());
+        }
+
+        private void BtnAppeal_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnInfo_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

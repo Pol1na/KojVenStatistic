@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace KojVenStatistic.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MeetPage.xaml
+    /// Логика взаимодействия для AppealPage.xaml
     /// </summary>
-    public partial class MeetPage : Page
+    public partial class AppealPage : Page
     {
-        public MeetPage()
+        public AppealPage()
         {
             InitializeComponent();
         }

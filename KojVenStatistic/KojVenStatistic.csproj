@@ -83,6 +83,7 @@
     <Compile Include="Entity\Client.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\ClientPartial.cs" />
     <Compile Include="Entity\Disease.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -122,10 +123,15 @@
     <Compile Include="Entity\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\UserPartial.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AppealPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ClientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,10 +141,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MedicamentsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MeetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +154,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\AppealPage.xaml.cs">
+      <DependentUpon>AppealPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientsPage.xaml.cs">
       <DependentUpon>ClientsPage.xaml</DependentUpon>
     </Compile>
@@ -160,9 +165,6 @@
     </Compile>
     <Compile Include="Pages\MedicamentsPage.xaml.cs">
       <DependentUpon>MedicamentsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MeetPage.xaml.cs">
-      <DependentUpon>MeetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\NavigationPage.xaml.cs">
       <DependentUpon>NavigationPage.xaml</DependentUpon>
@@ -208,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\logo.png" />
+    <Resource Include="Assets\empty.png" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

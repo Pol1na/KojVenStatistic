@@ -19,16 +19,36 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{DynamicResource ActiveGreen}">
-            <Image Source="/Assets/logo.png" Margin="5"/>
+        <Grid x:Name="UserInfo" Background="{DynamicResource ActiveGreen}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Margin="5" Width="40" Height="40" Stretch="Fill" >
+                <Image.Source>
+                    <Binding Path="Image">
+                        <Binding.TargetNullValue>
+                            <BitmapImage UriSource="/Assets/empty.png"/>
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </Image.Source>
+                <Image.Clip>
+                    <RectangleGeometry RadiusX="100" RadiusY="100" Rect="0,0,40,40"/>
+                </Image.Clip>
+            </Image>
+
+            <TextBlock Grid.Column="1" Text="{Binding FullName}" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Margin="5"/>
         </Grid>
+
 
         <Grid Background="{DynamicResource MainGreen}" Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0 50 0 10">
                 <DockPanel>
-                    <RadioButton Content="Пользователи" Style="{StaticResource RBtnCute}" GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnUsers"  Click="BtnUsers_Click" IsChecked="True" />
+                    <RadioButton Content="Пользователи" Style="{StaticResource RBtnCute}" GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnUsers"  Click="BtnUsers_Click"/>
                     <RadioButton Content="Пациенты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnClients" Click="BtnClients_Click"/>
                     <RadioButton Content="Медикаменты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnMedicaments" Click="BtnMedicaments_Click" />
+                    <RadioButton Content="Записть к врачу" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnAppeal" Click="BtnAppeal_Click"/>
+                    <RadioButton Content="Справка" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnInfo" Click="BtnInfo_Click"/>
                     <RadioButton Content="Выход" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Bottom" x:Name="BtnExit" Click="BtnExit_Click" />
                     <Grid Background="{DynamicResource MainGreen}"/>
                 </DockPanel>
@@ -36,6 +56,7 @@
         </Grid>
 
         <Grid  Grid.Column="1" Background="{DynamicResource MainGreen}">
+            <Image Source="/Assets/logo.png" Margin="10" HorizontalAlignment="Left"/>
             <TextBlock Text="{Binding ElementName=PageFrame,Path=Content.Title}" Style="{StaticResource TBlockHeader}"/>
         </Grid>
 

@@ -19,13 +19,13 @@ namespace KojVenStatistic.Entity
             this.Appeal = new HashSet<Appeal>();
         }
     
-        public int Id { get; set; }
+        public string Snils { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string NumberPassport { get; set; }
-        public string Adress { get; set; }
+        public string PassportNumber { get; set; }
+        public string PassportSeria { get; set; }
+        public string Address { get; set; }
         public System.DateTime DateOfBirth { get; set; }
-        public string Snils { get; set; }
         public string Telephone { get; set; }
         public string MedPolis { get; set; }
         public int GenderId { get; set; }

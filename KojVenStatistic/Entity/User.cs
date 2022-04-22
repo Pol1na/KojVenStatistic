@@ -30,6 +30,7 @@ namespace KojVenStatistic.Entity
         public string Email { get; set; }
         public int GenderId { get; set; }
         public int CategoryId { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual ICollection<Appeal> Appeal { get; set; }
         public virtual Category Category { get; set; }
