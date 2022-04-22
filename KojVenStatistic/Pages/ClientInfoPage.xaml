@@ -1,0 +1,65 @@
+﻿<Page x:Class="KojVenStatistic.Pages.ClientInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KojVenStatistic.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Информация о клиенте">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource TBlockHeader}" Foreground="Black" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Text="{Binding FullName}"></TextBlock>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Дата рождения:</TextBlock>
+                <DatePicker Width="120" Name="DatePickerBirth" IsEnabled="False"  Margin="5"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Номер телефона:</TextBlock>
+                <TextBox Name="TBoxPhone"  Margin="5" IsEnabled="False"  Text="{Binding Telephone}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Адрес:</TextBlock>
+                <TextBox Name="TBoxAddress" IsEnabled="False"  Margin="5" Text="{Binding Address}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Номер паспорта:</TextBlock>
+                <TextBox Name="TBoxPassportNumber" IsEnabled="False"  Margin="5" Text="{Binding PassportNumber}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Серия паспорта:</TextBlock>
+                <TextBox Name="TBoxPassportSerial" IsEnabled="False"  Margin="5" Text="{Binding PassportSeria}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Снилс:</TextBlock>
+                <TextBox Name="TBoxSnils" IsEnabled="False"  Margin="5" Text="{Binding Snils}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Мед.Полис:</TextBlock>
+                <TextBox Name="TBoxMed" IsEnabled="False"  Margin="5" Text="{Binding MedPolis}"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Тип приема:</TextBlock>
+                <ComboBox Width="120" Height="25" Name="CBoxType" IsEnabled="False"  Margin="5" DisplayMemberPath="" Text="{Binding MedPolis}"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Дата обращения:</TextBlock>
+                <DatePicker Name="DatePickerAppeal" Width="120" IsEnabled="False"  Margin="5" SelectedDate="{Binding Appeal.DateOfRequest}"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Диагноз:</TextBlock>
+                <TextBox Name="TBoxDisease" Width="120" IsEnabled="False"  Margin="5" Text="{Binding Appeal.Disease.Name}"></TextBox>
+            </StackPanel>
+            <Button Name="BtnAddMedicine" Click="BtnAddMedicine_Click">Выписать лекарства</Button>
+        </StackPanel>
+        <Button x:Name="BtnEdit" Grid.ColumnSpan="2" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnEdit_Click">Редактировать</Button>
+        
+    </Grid>
+</Page>

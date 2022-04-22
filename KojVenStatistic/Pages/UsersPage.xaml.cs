@@ -28,6 +28,18 @@ namespace KojVenStatistic.Pages
             categories.Insert(0, new Category { Name = "Все специальности" });
             CBoxCategories.ItemsSource = categories;
             CBoxCategories.SelectedIndex = 0;
+            if (AppData.user.PostId == 1)
+            {
+                BtnAdd.Visibility = Visibility.Visible;
+                BtnEdit.Visibility = Visibility.Visible;
+                BtnDelete.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnAdd.Visibility = Visibility.Collapsed;
+                BtnEdit.Visibility = Visibility.Collapsed;
+                BtnDelete.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void TBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,6 +70,26 @@ namespace KojVenStatistic.Pages
             {
                 TBlockPlaceholer.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnReport_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

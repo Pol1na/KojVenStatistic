@@ -72,5 +72,10 @@ namespace KojVenStatistic.Pages
         {
             UpdateList();
         }
+
+        private void BtnMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+           NavigationService.Navigate(new ClientInfoPage((sender as Button).DataContext as Client));
+        }
     }
 }

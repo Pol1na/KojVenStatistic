@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KojVenStatistic.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace KojVenStatistic
     {
         public static Frame MainFrame;
         public static Entity.KojVenStatisticEntities Context = new Entity.KojVenStatisticEntities();
+        public static User user;
     }
 }

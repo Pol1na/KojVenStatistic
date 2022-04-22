@@ -44,7 +44,7 @@
 
                             <StackPanel HorizontalAlignment="Right">
                                 <TextBlock Text="{Binding DateOfBirthText}" FontSize="20" Margin="5" />
-                                <Button Content="Подробнее" Width="120" HorizontalAlignment="Right"/>
+                                <Button Name="BtnMoreInfo"  Content="Подробнее" Width="120" HorizontalAlignment="Right" Click="BtnMoreInfo_Click"/>
                             </StackPanel>
                         </Grid>
                     </Border>
