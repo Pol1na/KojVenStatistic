@@ -44,6 +44,7 @@
                 <TextBox Name="TBoxMed" IsEnabled="False"  Margin="5" Text="{Binding MedPolis}"></TextBox>
             </StackPanel>
         </StackPanel>
+        
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Тип приема:</TextBlock>

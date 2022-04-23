@@ -19,6 +19,7 @@ namespace KojVenStatistic.Entity
             this.Appeal = new HashSet<Appeal>();
         }
     
+        public int Id { get; set; }
         public string Snils { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

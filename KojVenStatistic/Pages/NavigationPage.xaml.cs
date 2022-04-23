@@ -84,7 +84,7 @@ namespace KojVenStatistic.Pages
 
         private void BtnAppeal_Click(object sender, RoutedEventArgs e)
         {
-
+            PageFrame.Navigate(new AppealPage());
         }
 
         private void BtnInfo_Click(object sender, RoutedEventArgs e)

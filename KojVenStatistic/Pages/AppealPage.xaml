@@ -9,6 +9,60 @@
       Title="Записи на прием">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="White" Width="170" Margin="10"  HorizontalAlignment="Left">
+            <TextBlock Text="Поиск..." Margin="3 1" VerticalAlignment="Center" Foreground="Gray" x:Name="TBlockPlaceholer"/>
+            <TextBox x:Name="TBoxSearch" Background="Transparent" TextChanged="TBoxSearch_TextChanged" VerticalContentAlignment="Center" Width="170" Margin="0,0,0,-0.2" VerticalAlignment="Top"></TextBox>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <TextBlock Text="Фильтрация по специальности:" VerticalAlignment="Center"/>
+            <ComboBox Width="170" Margin="10" x:Name="CBoxCategories" DisplayMemberPath="Name" SelectionChanged="CBoxCategories_SelectionChanged"/>
+        </StackPanel>
+
+
+        <ListView Grid.Row="1" Margin="10" Name="LViewUsers" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="False" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="5" Background="{DynamicResource BackgroundColor}" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Margin="5">
+                        <Grid Width="500">
+                            <StackPanel >
+                                <TextBlock Text="{Binding FullName}" FontSize="20" Margin="5" />
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="Специальность: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding Category.Name}" Foreground="Gray"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="Стаж: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding Experience}" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding Email}" FontSize="20" Margin="5" />
+                                <TextBlock Text="{Binding PhoneNumber}" FontSize="20" Margin="5" HorizontalAlignment="Right"/>
+                                <Button Name="BtnCreateAppeal"  Content="Запись" Width="120" HorizontalAlignment="Right" Click="BtnCreateAppeal_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>
