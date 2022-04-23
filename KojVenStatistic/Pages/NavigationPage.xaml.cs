@@ -25,7 +25,7 @@ namespace KojVenStatistic.Pages
         public NavigationPage()
         {
             InitializeComponent();
-            _user = AppData.Context.User.FirstOrDefault(P => P.Id == Properties.Settings.Default.UserId);
+            _user = AppData.AuthUser;
             UserInfo.DataContext = _user;
 
             BtnAppeal.Visibility = Visibility.Collapsed;

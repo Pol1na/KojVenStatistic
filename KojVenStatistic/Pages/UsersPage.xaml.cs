@@ -28,7 +28,7 @@ namespace KojVenStatistic.Pages
             categories.Insert(0, new Category { Name = "Все специальности" });
             CBoxCategories.ItemsSource = categories;
             CBoxCategories.SelectedIndex = 0;
-            if (AppData.user.PostId == 1)
+            if (AppData.AuthUser.PostId == 1)
             {
                 BtnAdd.Visibility = Visibility.Visible;
                 BtnEdit.Visibility = Visibility.Visible;

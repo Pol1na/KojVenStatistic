@@ -12,6 +12,6 @@ namespace KojVenStatistic
     {
         public static Frame MainFrame;
         public static Entity.KojVenStatisticEntities Context = new Entity.KojVenStatisticEntities();
-        public static User user;
+        public static User AuthUser;
     }
 }

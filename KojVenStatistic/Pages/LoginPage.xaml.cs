@@ -32,7 +32,7 @@ namespace KojVenStatistic.Pages
                 var result = AppData.Context.User.ToList().FirstOrDefault(P => P.Login == TBoxLogin.Text && P.Password == TBoxPassword.Text);
                 if (result != null)
                 {
-                    Properties.Settings.Default.UserId = result.Id;
+                    AppData.AuthUser = result;
                     AppData.MainFrame.Navigate(new NavigationPage());
                 }
                 else

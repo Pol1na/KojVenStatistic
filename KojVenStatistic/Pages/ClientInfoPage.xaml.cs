@@ -25,7 +25,7 @@ namespace KojVenStatistic.Pages
         {
             InitializeComponent();
             this.DataContext = client;
-            if (AppData.user.PostId == 1)
+            if (AppData.AuthUser.PostId == 1)
             {
                 BtnEdit.Visibility = Visibility.Visible;
                 DatePickerBirth.IsEnabled = true;
