@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KojVenStatistic
+namespace KojVenStatistic.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
