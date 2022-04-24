@@ -76,12 +76,14 @@ namespace KojVenStatistic.Pages
                     appeal.DateOfRequest = new DateTime(date.Year, date.Month, date.Day,
                         int.Parse(TBoxHour.Text), int.Parse(TBoxMinute.Text), 0);
                     appeal.User = _selectedDoctor;
+                    if(new TicketPreviewWindow(appeal).ShowDialog() == true)
+                    {
+                        appeal = AppData.Context.Appeal.Add(appeal);
+                        AppData.Context.SaveChanges();
+                        NavigationService.GoBack();
+                        MessageBox.Show("Запись успешно создана.", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
 
-                    AppData.Context.Appeal.Add(appeal);
-                    AppData.Context.SaveChanges();
-
-                    NavigationService.GoBack();
-                    MessageBox.Show("Запись успешно создана.", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
