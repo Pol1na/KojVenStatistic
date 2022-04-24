@@ -21,8 +21,9 @@ namespace KojVenStatistic.Pages
     /// </summary>
     public partial class ClientInfoPage : Page
     {
-        Client _client;
-        DateTime date;
+        private Client _client;
+        private int _selectedPage;
+        private int _pagesCount;
         public ClientInfoPage(Client client)
         {
             InitializeComponent();
@@ -50,7 +51,14 @@ namespace KojVenStatistic.Pages
                 BtnEdit.Visibility = Visibility.Collapsed;
             }
             _client = client;
-            date = client.LastAppeal.DateOfRequest;
+
+
+
+            _pagesCount = client.Appeal.Count();
+            _selectedPage = _pagesCount - 1; 
+
+            ChangePage();
+            UpdateArrows();
         }
 
         private void BtnAddMedicine_Click(object sender, RoutedEventArgs e)
@@ -65,39 +73,57 @@ namespace KojVenStatistic.Pages
 
         private void BtnGoPrevious_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            try
+            if(_selectedPage > 0)
             {
-                BtnGoNext.IsEnabled = true;
-                SPOptional.DataContext = _client.Appeal.OrderBy(i => i.DateOfRequest).First(i => i.DateOfRequest < date);
-                CBoxType.Text = _client.Appeal.OrderBy(i => i.DateOfRequest).First(i => i.DateOfRequest < date).AppealType.Name;
-                date = _client.Appeal.OrderBy(i => i.DateOfRequest).First(i => i.DateOfRequest < date).DateOfRequest;
+                _selectedPage--;
+                ChangePage();
             }
-            catch (Exception)
+            UpdateArrows();
+        }
+        private void BtnGoNext_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_selectedPage < _pagesCount - 1)
             {
-                BtnGoPrevious.IsEnabled = false;
-                MessageBox.Show("Больше нет записей по этому клиенту");
-                //BtnGoNext.Source = Properties.Resources.left_arrow_disabled;
+                _selectedPage++;
+                ChangePage();
+            }
+            UpdateArrows();
 
+        }
+
+        private void UpdateArrows()
+        {
+            // Правая стрелка
+            if (_selectedPage != _pagesCount - 1)
+            {
+                BtnGoNext.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow.png", UriKind.Relative));
+            }
+            else
+            {
+                BtnGoNext.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow_disabled.png", UriKind.Relative));
+            }
+            // Левая стрелка
+            if (_selectedPage != 0)
+            {
+                BtnGoPrevious.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow.png", UriKind.Relative));
+            }
+            else
+            {
+                BtnGoPrevious.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow_disabled.png", UriKind.Relative));
             }
         }
 
-        private void BtnGoNext_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ChangePage()
         {
+            var appeals = _client.Appeal.OrderBy(i => i.DateOfRequest).ToList();
             try
             {
-                BtnGoPrevious.IsEnabled = true;
-                SPOptional.DataContext = _client.Appeal.OrderBy(i => i.DateOfRequest).First(i => i.DateOfRequest > date);
-                CBoxType.Text = _client.Appeal.OrderBy(i => i.DateOfRequest).First(i => i.DateOfRequest > date).AppealType.Name;
-                date = _client.Appeal.OrderBy(i=>i.DateOfRequest).First(i => i.DateOfRequest > date).DateOfRequest;
+                SPOptional.DataContext = appeals[_selectedPage];
             }
-            catch (Exception)
+            catch 
             {
-                BtnGoNext.IsEnabled = false;
-                MessageBox.Show("Больше нет записей по этому клиенту");
-                //BtnGoNext.Source = Properties.Resources.left_arrow_disabled;
-            }
 
-             
-       }
+            }
+        }
     }
 }

@@ -12,6 +12,6 @@ namespace KojVenStatistic.Entity
 
         public string DateOfBirthText => DateOfBirth.ToLongDateString();
 
-        public Appeal LastAppeal => Appeal.OrderBy(i=>i.DateOfRequest).Last();
+        public Appeal LastAppeal => Appeal.OrderBy(i=>i.DateOfRequest).LastOrDefault();
     }
 }
