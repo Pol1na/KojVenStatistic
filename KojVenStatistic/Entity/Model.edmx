@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище KojVenStatisticModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KojVenStatisticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appeal">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,10 +12,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="DiseaseId" Type="int" Nullable="false" />
+          <Property Name="DiseaseId" Type="int" />
           <Property Name="DateOfRequest" Type="datetime" Nullable="false" />
+          <Property Name="AppealTypeId" Type="int" Nullable="false" />
           <Property Name="DateOfFinish" Type="datetime" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AppealType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -62,6 +70,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="MedicamentOfDisease">
           <Key>
@@ -95,6 +104,16 @@
           <Property Name="AppealId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
             <PropertyRef Name="Id" />
@@ -119,6 +138,18 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Appeal_AppealType">
+          <End Role="AppealType" Type="Self.AppealType" Multiplicity="1" />
+          <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppealType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appeal">
+              <PropertyRef Name="AppealTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Appeal_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
@@ -132,7 +163,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Disease">
-          <End Role="Disease" Type="Self.Disease" Multiplicity="1" />
+          <End Role="Disease" Type="Self.Disease" Multiplicity="0..1" />
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disease">
@@ -275,8 +306,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище KojVenStatisticModelContainer">
+        <EntityContainer Name="KojVenStatisticModelStoreContainer">
           <EntitySet Name="Appeal" EntityType="Self.Appeal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppealType" EntityType="Self.AppealType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disease" EntityType="Self.Disease" Schema="dbo" store:Type="Tables" />
@@ -286,8 +318,13 @@
           <EntitySet Name="MedicamentOfRecipe" EntityType="Self.MedicamentOfRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Appeal_AppealType" Association="Self.FK_Appeal_AppealType">
+            <End Role="AppealType" EntitySet="AppealType" />
+            <End Role="Appeal" EntitySet="Appeal" />
+          </AssociationSet>
           <AssociationSet Name="FK_Appeal_Client" Association="Self.FK_Appeal_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Appeal" EntitySet="Appeal" />
@@ -347,6 +384,7 @@
       <Schema Namespace="KojVenStatisticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="KojVenStatisticEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Appeal" EntityType="KojVenStatisticModel.Appeal" />
+          <EntitySet Name="AppealType" EntityType="KojVenStatisticModel.AppealType" />
           <EntitySet Name="Category" EntityType="KojVenStatisticModel.Category" />
           <EntitySet Name="Client" EntityType="KojVenStatisticModel.Client" />
           <EntitySet Name="Disease" EntityType="KojVenStatisticModel.Disease" />
@@ -355,8 +393,13 @@
           <EntitySet Name="MedicamentOfRecipe" EntityType="KojVenStatisticModel.MedicamentOfRecipe" />
           <EntitySet Name="Post" EntityType="KojVenStatisticModel.Post" />
           <EntitySet Name="Recipe" EntityType="KojVenStatisticModel.Recipe" />
+          <EntitySet Name="sysdiagrams" EntityType="KojVenStatisticModel.sysdiagrams" />
           <EntitySet Name="TypeDisease" EntityType="KojVenStatisticModel.TypeDisease" />
           <EntitySet Name="User" EntityType="KojVenStatisticModel.User" />
+          <AssociationSet Name="FK_Appeal_AppealType" Association="KojVenStatisticModel.FK_Appeal_AppealType">
+            <End Role="AppealType" EntitySet="AppealType" />
+            <End Role="Appeal" EntitySet="Appeal" />
+          </AssociationSet>
           <AssociationSet Name="FK_Appeal_Client" Association="KojVenStatisticModel.FK_Appeal_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Appeal" EntitySet="Appeal" />
@@ -413,14 +456,24 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="DiseaseId" Type="Int32" Nullable="false" />
+          <Property Name="DiseaseId" Type="Int32" />
           <Property Name="DateOfRequest" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AppealTypeId" Type="Int32" Nullable="false" />
           <Property Name="DateOfFinish" Type="DateTime" Precision="3" />
-          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppealType" Relationship="KojVenStatisticModel.FK_Appeal_AppealType" FromRole="Appeal" ToRole="AppealType" />
           <NavigationProperty Name="Client" Relationship="KojVenStatisticModel.FK_Appeal_Client" FromRole="Appeal" ToRole="Client" />
           <NavigationProperty Name="Disease" Relationship="KojVenStatisticModel.FK_Appeal_Disease" FromRole="Appeal" ToRole="Disease" />
           <NavigationProperty Name="User" Relationship="KojVenStatisticModel.FK_Appeal_User" FromRole="Appeal" ToRole="User" />
           <NavigationProperty Name="Recipe" Relationship="KojVenStatisticModel.FK_Recipe_Appeal" FromRole="Appeal" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="AppealType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Appeal_AppealType" FromRole="AppealType" ToRole="Appeal" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -475,6 +528,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MedicamentOfRecipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Medicament" FromRole="Medicament" ToRole="MedicamentOfRecipe" />
           <NavigationProperty Name="Disease" Relationship="KojVenStatisticModel.MedicamentOfDisease" FromRole="Medicament" ToRole="Disease" />
         </EntityType>
@@ -507,6 +561,16 @@
           <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Recipe_Appeal" FromRole="Recipe" ToRole="Appeal" />
           <NavigationProperty Name="MedicamentOfRecipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Recipe" FromRole="Recipe" ToRole="MedicamentOfRecipe" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
             <PropertyRef Name="Id" />
@@ -536,6 +600,18 @@
           <NavigationProperty Name="Gender" Relationship="KojVenStatisticModel.FK_User_Gender" FromRole="User" ToRole="Gender" />
           <NavigationProperty Name="Post" Relationship="KojVenStatisticModel.FK_User_Post" FromRole="User" ToRole="Post" />
         </EntityType>
+        <Association Name="FK_Appeal_AppealType">
+          <End Type="KojVenStatisticModel.AppealType" Role="AppealType" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppealType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appeal">
+              <PropertyRef Name="AppealTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Appeal_Client">
           <End Type="KojVenStatisticModel.Client" Role="Client" Multiplicity="1" />
           <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
@@ -549,7 +625,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Disease">
-          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="0..1" />
           <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disease">
@@ -672,21 +748,30 @@
           <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
           <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище KojVenStatisticModelContainer" CdmEntityContainer="KojVenStatisticEntities">
+        <EntityContainerMapping StorageEntityContainer="KojVenStatisticModelStoreContainer" CdmEntityContainer="KojVenStatisticEntities">
           <EntitySetMapping Name="Appeal">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Appeal">
               <MappingFragment StoreEntitySet="Appeal">
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="DateOfFinish" ColumnName="DateOfFinish" />
+                <ScalarProperty Name="AppealTypeId" ColumnName="AppealTypeId" />
                 <ScalarProperty Name="DateOfRequest" ColumnName="DateOfRequest" />
                 <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppealType">
+            <EntityTypeMapping TypeName="KojVenStatisticModel.AppealType">
+              <MappingFragment StoreEntitySet="AppealType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -737,6 +822,7 @@
           <EntitySetMapping Name="Medicament">
             <EntityTypeMapping TypeName="KojVenStatisticModel.Medicament">
               <MappingFragment StoreEntitySet="Medicament">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -765,6 +851,17 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="AppealId" ColumnName="AppealId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KojVenStatisticModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -819,7 +916,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

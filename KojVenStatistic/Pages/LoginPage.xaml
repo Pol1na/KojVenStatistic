@@ -26,7 +26,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="5">
                 <TextBlock Text="Пароль" FontSize="20" VerticalAlignment="Center"/>
-                <TextBox FontSize="20" Width="150" Margin="5" Name="TBoxPassword"/>
+                <PasswordBox FontSize="20" Width="150" Margin="5" Name="PBoxPassword"/>
             </StackPanel>
 
             <Button Content="Войти" Grid.Row="3" Click="BtnLogin_Click" x:Name="BtnLogin"/>

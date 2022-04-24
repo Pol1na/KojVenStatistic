@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -65,26 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Entity\AppealPartial.cs" />
-    <Compile Include="Pages\AppealsListPage.xaml.cs">
-      <DependentUpon>AppealsListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ClientEditorWindow.xaml.cs">
-      <DependentUpon>ClientEditorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\TicketPreviewWindow.xaml.cs">
-      <DependentUpon>TicketPreviewWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Windows\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Classes\AppData.cs" />
     <Compile Include="Entity\Appeal.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\AppealPartial.cs" />
+    <Compile Include="Entity\AppealType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Category.cs">
@@ -93,7 +79,6 @@
     <Compile Include="Entity\Client.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\ClientPartial.cs" />
     <Compile Include="Entity\Disease.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -127,12 +112,41 @@
     <Compile Include="Entity\Recipe.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sysdiagrams.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\TypeDisease.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AppealsListPage.xaml.cs">
+      <DependentUpon>AppealsListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddMedicamentWindow.xaml.cs">
+      <DependentUpon>AddMedicamentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ClientEditorWindow.xaml.cs">
+      <DependentUpon>ClientEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TicketPreviewWindow.xaml.cs">
+      <DependentUpon>TicketPreviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\AddMedicamentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\AppData.cs" />
+    <Compile Include="Entity\ClientPartial.cs" />
     <Compile Include="Entity\UserPartial.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -247,6 +261,12 @@
   <ItemGroup>
     <Resource Include="Assets\logo.png" />
     <Resource Include="Assets\empty.png" />
+    <Resource Include="Assets\left_arrow.png" />
+    <Resource Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left_arrow_disabled.png" />
+    <Resource Include="Assets\left_arrow_disabled.png" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -257,7 +277,6 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Resource Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

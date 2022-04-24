@@ -12,16 +12,16 @@ namespace KojVenStatistic.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class AppealType
     {
-        public Category()
+        public AppealType()
         {
-            this.User = new HashSet<User>();
+            this.Appeal = new HashSet<Appeal>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<Appeal> Appeal { get; set; }
     }
 }

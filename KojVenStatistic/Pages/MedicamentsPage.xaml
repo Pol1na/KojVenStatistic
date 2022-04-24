@@ -8,23 +8,52 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Медикаменты">
 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
+        <ListView Grid.Row="1" Margin="10" Name="LViewMedicaments" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="False" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="5" Background="{DynamicResource BackgroundColor}" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Margin="5">
+                        <Grid Width="500">
+                            <StackPanel >
+                                <TextBlock Text="{Binding Name}" FontSize="20" Margin="5" />
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="Описание: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="Gray"/>
+                                </StackPanel>
+                                <Button Name="BtnDelete" Content="Удалить" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" Click="BtnDelete_Click"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+   
+        <Button Name="BtnAddMedicament" Grid.Row="2" Content="Добавить"  VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Left" Margin="5"  Click="BtnAddMedicament_Click"></Button>
+        <Grid Background="White" Width="170" Margin="10"  HorizontalAlignment="Left">
+        <TextBlock Text="Поиск..." Margin="3 1" VerticalAlignment="Center" Foreground="Gray" x:Name="TBlockPlaceholer"/>
+        <TextBox x:Name="TBoxSearch" Background="Transparent" TextChanged="TBoxSearch_TextChanged" VerticalContentAlignment="Center" Width="170"></TextBox>
+        </Grid>
 
-
-        <DataGrid Grid.Row="1" Margin="10" Name="DGUsers" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id медикамента" Binding="{Binding Id}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="auto"></DataGridTextColumn>
-            </DataGrid.Columns>
-
-        </DataGrid>
-
-
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <TextBlock Text="Сортировка:" VerticalAlignment="Center"/>
+            <ComboBox Width="170" Margin="10" x:Name="CBoxSort" SelectionChanged="CBoxSort_SelectionChanged"/>
+        </StackPanel>
     </Grid>
 </Page>

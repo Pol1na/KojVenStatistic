@@ -28,8 +28,8 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Заболевание:" Margin="5" VerticalAlignment="Center"/>
-                <ComboBox x:Name="CBoxDisease" DisplayMemberPath="Name" Width="150" Margin="5"  VerticalAlignment="Center"/>
+                <TextBlock Text="Тип приема:" Margin="5" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CBoxTypeAppeal" DisplayMemberPath="Name" Width="150" Margin="5"  VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Дата записи:" Margin="5" VerticalAlignment="Center"/>

@@ -1,0 +1,27 @@
+﻿<Window x:Class="KojVenStatistic.Windows.AddMedicamentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KojVenStatistic.Windows"
+        mc:Ignorable="d"
+        Title="Добавление медикамента" Height="250" Width="400">
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource TBlockHeader}" Foreground="Black">Добавление медикамента</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Margin="5">Название:</TextBlock>
+                <TextBox Name="TBoxName" Margin="5"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Margin="5">Описание:</TextBlock>
+                <TextBox Name="TBoxDescription" Margin="5"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Margin="5">Болезнь:</TextBlock>
+                <ComboBox Name="CBoxDisease" Width="130" DisplayMemberPath="Name" Margin="5"></ComboBox>
+            </StackPanel>
+            <Button Name="AddBtn" Click="AddBtn_Click">Добавить</Button>
+        </StackPanel>
+    </Grid>
+</Window>

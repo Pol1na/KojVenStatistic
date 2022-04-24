@@ -24,7 +24,70 @@ namespace KojVenStatistic.Pages
         public MedicamentsPage()
         {
             InitializeComponent();
-            DGUsers.ItemsSource = AppData.Context.Medicament.ToList();
+            LViewMedicaments.ItemsSource = AppData.Context.Medicament.ToList();
+            CBoxSort.ItemsSource = new string[] { "Без сортировки", "По имени (возр.)", "По имени (убыв.)", "По описанию (возр.)", "По описанию (убыв.)" };
+            CBoxSort.SelectedIndex = 0;
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите удалить данный препарат?",
+    "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                AppData.Context.Medicament.Remove((sender as Button).DataContext as Medicament);
+                AppData.Context.SaveChanges();
+                UpdateList();
+            }
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateList();
+            if (!string.IsNullOrEmpty(TBoxSearch.Text))
+                TBlockPlaceholer.Visibility = Visibility.Collapsed;
+            else
+                TBlockPlaceholer.Visibility = Visibility.Visible;
+        }
+        private void UpdateList()
+        {
+            List<Medicament> medicaments = AppData.Context.Medicament.ToList();
+
+            string text = TBoxSearch.Text.ToLower();
+            if (!string.IsNullOrWhiteSpace(text))
+                medicaments = medicaments.Where(x => x.Name.ToLower().Contains(text) || x.Description.ToLower().Contains(text)).ToList();
+            switch (CBoxSort.SelectedIndex)
+            {
+                case 1:
+                    medicaments = medicaments.OrderBy(x => x.Name).ToList();
+                    break;
+                case 2:
+                    medicaments = medicaments.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case 3:
+                    medicaments = medicaments.OrderBy(x => x.Description).ToList();
+                    break;
+                case 4:
+                    medicaments = medicaments.OrderByDescending(x => x.Description).ToList();
+                    break;
+                default:
+                    break;
+            }
+            LViewMedicaments.ItemsSource = medicaments;
+
+        }
+
+        private void BtnAddMedicament_Click(object sender, RoutedEventArgs e)
+        {
+            Window editor = new Windows.AddMedicamentWindow();
+            if (editor.ShowDialog() == true)
+            {
+                UpdateList();
+            }
+        }
+
+        private void CBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateList();
         }
     }
 }

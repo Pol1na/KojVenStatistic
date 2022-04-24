@@ -24,12 +24,13 @@ namespace KojVenStatistic.Pages
         public LoginPage()
         {
             InitializeComponent();
+            
         }
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var result = AppData.Context.User.ToList().FirstOrDefault(P => P.Login == TBoxLogin.Text && P.Password == TBoxPassword.Text);
+                var result = AppData.Context.User.ToList().FirstOrDefault(P => P.Login == TBoxLogin.Text && P.Password == PBoxPassword.Password);
                 if (result != null)
                 {
                     AppData.AuthUser = result;

@@ -29,7 +29,7 @@ namespace KojVenStatistic.Pages
             _selectedDoctor = selectedDoctor;
             TBlockHeader.DataContext = selectedDoctor;
             CBoxSnils.ItemsSource = AppData.Context.Client.ToList();
-            CBoxDisease.ItemsSource = AppData.Context.Disease.ToList();
+            CBoxTypeAppeal.ItemsSource = AppData.Context.AppealType.ToList();
             DPickerRequetsDate.DisplayDateStart = DateTime.Now;
             DPickerRequetsDate.DisplayDateEnd = DateTime.Now.AddDays(14);
         }
@@ -61,7 +61,7 @@ namespace KojVenStatistic.Pages
                         MessageBox.Show("Выберите дату приема.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    if(CBoxDisease.SelectedItem is null)
+                    if(CBoxTypeAppeal.SelectedItem is null)
                     {
                         MessageBox.Show("Выберите заболевание.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -70,7 +70,7 @@ namespace KojVenStatistic.Pages
                     Appeal appeal = new Appeal();
                     appeal.Client = client;
 
-                    appeal.Disease = CBoxDisease.SelectedItem as Disease;
+                    appeal.AppealType = CBoxTypeAppeal.SelectedItem as AppealType;
 
                     var date = DPickerRequetsDate.SelectedDate.Value;
                     appeal.DateOfRequest = new DateTime(date.Year, date.Month, date.Day,
