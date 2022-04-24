@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KojVenStatistic.Windows"
         mc:Ignorable="d"
-        Title="Добавление клиента" Height="350" Width="590" ResizeMode="NoResize">
+        Title="Добавление клиента" Height="400" Width="590" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -32,15 +32,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <TextBlock Text="Серия паспорта:" Margin="5"  VerticalAlignment="Center"/>
-                <TextBox x:Name="TBoxPassportSeria" Width="150" Margin="5"  VerticalAlignment="Center" Height="auto"/>
+                <TextBox x:Name="TBoxPassportSeria" Width="150" Margin="5"  VerticalAlignment="Center" Height="auto" MaxLength="4"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <TextBlock Text="Номер паспорта:" Margin="5"  VerticalAlignment="Center"/>
-                <TextBox x:Name="TBoxPassportNumber" Width="150" Margin="5"  VerticalAlignment="Center" Height="auto"/>
+                <TextBox x:Name="TBoxPassportNumber" Width="150" Margin="5"  VerticalAlignment="Center" Height="auto" MaxLength="6"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <TextBlock Text="Адрес:" Margin="5"  VerticalAlignment="Top"/>
-                <RichTextBox x:Name="TBoxAddress" Width="150" Height="150" Margin="5" VerticalAlignment="Center"/>
+                <TextBox x:Name="TBoxAddress" Width="150" Height="150" Margin="5" VerticalAlignment="Center" TextWrapping="Wrap"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -50,16 +50,18 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <TextBlock Text="Номер телефона:" Margin="5"  VerticalAlignment="Top"/>
-                <TextBox x:Name="TBoxTelephone" Width="150" Height="auto" Margin="5" VerticalAlignment="Center" Background="White"/>
+                <TextBox x:Name="TBoxTelephone" Width="150" Height="auto" Margin="5" VerticalAlignment="Center" Background="White" MaxLength="12" />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <TextBlock Text="Номер полиса:" Margin="5"  VerticalAlignment="Top"/>
-                <TextBox x:Name="TBoxMedPolis" Width="150" Height="auto" Margin="5" VerticalAlignment="Center" Background="White"/>
+                <TextBox x:Name="TBoxMedPolis" Width="150" Height="auto" Margin="5" VerticalAlignment="Center" Background="White" MaxLength="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <TextBlock Text="Пол:" Margin="5"  VerticalAlignment="Top"/>
                 <ComboBox x:Name="CBoxGender" Width="150" Height="auto" Margin="5" VerticalAlignment="Center" Background="White" DisplayMemberPath="Name"/>
             </StackPanel>
+            
         </StackPanel>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Добавить клиента" x:Name="BtnAddClient" Click="BtnAddClient_Click"/>
     </Grid>
 </Window>
