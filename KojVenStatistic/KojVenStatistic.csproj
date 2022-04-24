@@ -112,9 +112,6 @@
     <Compile Include="Entity\Recipe.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entity\TypeDisease.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

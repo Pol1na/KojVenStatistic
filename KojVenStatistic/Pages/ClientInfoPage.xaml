@@ -61,7 +61,7 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" Name="SPOptional">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Тип приема:</TextBlock>
-                <ComboBox Width="120" Height="25" Name="CBoxType" IsEnabled="False"  Margin="5" Text="{Binding AppealType.Name}"></ComboBox>
+                <ComboBox Width="120" Height="25" Name="CBoxType" IsEnabled="False"  Margin="5" DisplayMemberPath="Name" Text="{Binding AppealType.Name}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата обращения:</TextBlock>

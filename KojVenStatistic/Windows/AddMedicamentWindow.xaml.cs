@@ -20,23 +20,71 @@ namespace KojVenStatistic.Windows
     /// </summary>
     public partial class AddMedicamentWindow : Window
     {
+        private List<Disease> _selectedDiseases => LViewDisease.ItemsSource as List<Disease>;
+        private List<Disease> _allDieseases => CBoxDisease.ItemsSource as List<Disease>;
         public AddMedicamentWindow()
         {
             InitializeComponent();
             CBoxDisease.ItemsSource = AppData.Context.Disease.ToList();
+            LViewDisease.ItemsSource = new List<Disease>();
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            var medicament = new Medicament()
+            try
             {
-                Name = TBoxName.Text,
-                Description = TBoxDescription.Text,
-//                Disease = CBoxDisease.SelectedItem as Disease,
-            };
-            AppData.Context.Medicament.Add(medicament);
-            AppData.Context.SaveChanges();
-           
+                var medicament = new Medicament()
+                {
+                    Name = TBoxName.Text,
+                    Description = TBoxDescription.Text,
+                    Disease = _selectedDiseases,
+                };
+                AppData.Context.Medicament.Add(medicament);
+                AppData.Context.SaveChanges();
+                DialogResult = true;
+                Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка проверьте правильность заполнения полей.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void BtnAddDisease_Click(object sender, RoutedEventArgs e)
+        {
+            if(CBoxDisease.SelectedItem is Disease disease)
+            {
+                _selectedDiseases.Add(disease);
+                LViewDisease.ItemsSource = _selectedDiseases.ToList();
+
+                _allDieseases.Remove(disease);
+                CBoxDisease.ItemsSource = _allDieseases.ToList();
+            }
+            else
+            {
+                MessageBox.Show("Выберите болезнь из списка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+        }
+
+        private void BtnRemoveDisease_Click(object sender, RoutedEventArgs e)
+        {
+
+            if ((sender as Button).DataContext is Disease disease)
+            {
+                _allDieseases.Add(disease);
+                CBoxDisease.ItemsSource = _allDieseases.ToList();
+
+                _selectedDiseases.Remove(disease);
+                LViewDisease.ItemsSource = _selectedDiseases.ToList();
+            }
+            else
+            {
+                MessageBox.Show("Выберите болезнь из списка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
         }
     }
 }

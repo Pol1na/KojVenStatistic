@@ -30,8 +30,6 @@ namespace KojVenStatistic.Pages
             this.DataContext = client;
             SPOptional.DataContext = client.LastAppeal;
             CBoxType.ItemsSource = AppData.Context.AppealType.ToList();
-            CBoxType.DisplayMemberPath = "Name";
-            CBoxType.Text = client.LastAppeal.AppealType.Name;
             if (AppData.AuthUser.PostId == 1)
             {
                 BtnEdit.Visibility = Visibility.Visible;

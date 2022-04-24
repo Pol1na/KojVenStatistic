@@ -104,16 +104,6 @@
           <Property Name="AppealId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
             <PropertyRef Name="Id" />
@@ -139,7 +129,9 @@
           <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Appeal_AppealType">
-          <End Role="AppealType" Type="Self.AppealType" Multiplicity="1" />
+          <End Role="AppealType" Type="Self.AppealType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AppealType">
@@ -151,7 +143,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -163,7 +157,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Disease">
-          <End Role="Disease" Type="Self.Disease" Multiplicity="0..1" />
+          <End Role="Disease" Type="Self.Disease" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disease">
@@ -187,7 +183,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Client_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -199,7 +197,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Disease_TypeDisease">
-          <End Role="TypeDisease" Type="Self.TypeDisease" Multiplicity="0..1" />
+          <End Role="TypeDisease" Type="Self.TypeDisease" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Disease" Type="Self.Disease" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeDisease">
@@ -211,7 +211,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfDisease_Disease">
-          <End Role="Disease" Type="Self.Disease" Multiplicity="1" />
+          <End Role="Disease" Type="Self.Disease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MedicamentOfDisease" Type="Self.MedicamentOfDisease" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disease">
@@ -223,7 +225,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfDisease_Medicament">
-          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MedicamentOfDisease" Type="Self.MedicamentOfDisease" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicament">
@@ -235,7 +239,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Medicament">
-          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicament">
@@ -247,7 +253,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
@@ -259,7 +267,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipe_Appeal">
-          <End Role="Appeal" Type="Self.Appeal" Multiplicity="1" />
+          <End Role="Appeal" Type="Self.Appeal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Appeal">
@@ -271,7 +281,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
@@ -283,7 +295,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -295,7 +309,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Post">
-          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Post">
@@ -318,7 +334,6 @@
           <EntitySet Name="MedicamentOfRecipe" EntityType="Self.MedicamentOfRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Appeal_AppealType" Association="Self.FK_Appeal_AppealType">
@@ -393,7 +408,6 @@
           <EntitySet Name="MedicamentOfRecipe" EntityType="KojVenStatisticModel.MedicamentOfRecipe" />
           <EntitySet Name="Post" EntityType="KojVenStatisticModel.Post" />
           <EntitySet Name="Recipe" EntityType="KojVenStatisticModel.Recipe" />
-          <EntitySet Name="sysdiagrams" EntityType="KojVenStatisticModel.sysdiagrams" />
           <EntitySet Name="TypeDisease" EntityType="KojVenStatisticModel.TypeDisease" />
           <EntitySet Name="User" EntityType="KojVenStatisticModel.User" />
           <AssociationSet Name="FK_Appeal_AppealType" Association="KojVenStatisticModel.FK_Appeal_AppealType">
@@ -561,16 +575,6 @@
           <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Recipe_Appeal" FromRole="Recipe" ToRole="Appeal" />
           <NavigationProperty Name="MedicamentOfRecipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Recipe" FromRole="Recipe" ToRole="MedicamentOfRecipe" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
             <PropertyRef Name="Id" />
@@ -601,7 +605,9 @@
           <NavigationProperty Name="Post" Relationship="KojVenStatisticModel.FK_User_Post" FromRole="User" ToRole="Post" />
         </EntityType>
         <Association Name="FK_Appeal_AppealType">
-          <End Type="KojVenStatisticModel.AppealType" Role="AppealType" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.AppealType" Role="AppealType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AppealType">
@@ -613,7 +619,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Client">
-          <End Type="KojVenStatisticModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Client" Role="Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -625,7 +633,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appeal_Disease">
-          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="0..1" />
+          <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disease">
@@ -649,7 +659,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipe_Appeal">
-          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Appeal">
@@ -661,7 +673,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Category">
-          <End Type="KojVenStatisticModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
@@ -673,7 +687,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Client_Gender">
-          <End Type="KojVenStatisticModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Gender" Role="Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.Client" Role="Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -685,7 +701,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Disease_TypeDisease">
-          <End Type="KojVenStatisticModel.TypeDisease" Role="TypeDisease" Multiplicity="0..1" />
+          <End Type="KojVenStatisticModel.TypeDisease" Role="TypeDisease" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeDisease">
@@ -697,7 +715,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Gender">
-          <End Type="KojVenStatisticModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Gender" Role="Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -709,7 +729,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Medicament">
-          <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.MedicamentOfRecipe" Role="MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicament">
@@ -721,7 +743,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Recipe">
-          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.MedicamentOfRecipe" Role="MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
@@ -733,7 +757,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Post">
-          <End Type="KojVenStatisticModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="KojVenStatisticModel.Post" Role="Post" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="KojVenStatisticModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Post">
@@ -748,7 +774,7 @@
           <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
           <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -851,17 +877,6 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="AppealId" ColumnName="AppealId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="KojVenStatisticModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,21 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KojVenStatistic.Windows"
         mc:Ignorable="d"
-        Title="Добавление медикамента" Height="300" Width="400">
+        Title="Добавление медикамента" Height="400" Width="400" ResizeMode="NoResize">
     <Grid>
-        <TextBlock Style="{StaticResource TBlockHeader}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black">Добавление медикамента</TextBlock>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource TBlockHeader}" VerticalAlignment="Top" Foreground="Black" Margin="5">Добавление медикамента</TextBlock>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Название:</TextBlock>
-                <TextBox Name="TBoxName" Margin="5"></TextBox>
+                <TextBox Name="TBoxName" Margin="5" Width="170"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Описание:</TextBlock>
-                <TextBox Name="TBoxDescription" Height="50" TextWrapping="Wrap" Margin="5"></TextBox>
+                <TextBox Name="TBoxDescription" Height="100" TextWrapping="Wrap" Margin="5" Width="170"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 -35 0">
+                <TextBlock Margin="5">Болезнь:</TextBlock>
+                <ComboBox Name="CBoxDisease" Width="170" DisplayMemberPath="Name" Margin="5"></ComboBox>
+                <Button Content="🞣" Width="25" Height="25" Padding="0" x:Name="BtnAddDisease" Click="BtnAddDisease_Click">
+                    <Button.ToolTip>
+                        <ToolTip Content="Добавить новую болезнь"/>
+                    </Button.ToolTip>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Margin="5">Болезнь:</TextBlock>
-                <ComboBox Name="CBoxDisease" Width="120" DisplayMemberPath="Name" Margin="5"></ComboBox>
+                <ListView Name="LViewDisease" Height="100" Margin="5" Width="170" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="150"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Focusable" Value="False" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="100"/>
+                                <Button Padding="0" Content="X" Width="25" Height="25" x:Name="BtnRemoveDisease" Click="BtnRemoveDisease_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
             <Button Name="AddBtn" Click="AddBtn_Click">Добавить</Button>
         </StackPanel>
