@@ -33,8 +33,8 @@
                     <TextBlock Text="{Binding RequestTimeText}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                    <TextBlock Text="Болезнь:" Margin="0 0 2 0"/>
-                    <TextBlock Text="{Binding Disease.Name}"/>
+                    <TextBlock Text="Тип приема:" Margin="0 0 2 0"/>
+                    <TextBlock Text="{Binding AppealType.Name}"/>
                 </StackPanel>
                 <TextBlock Text="-----------------------------------" FontSize="24" HorizontalAlignment="Left" Margin="5 0"/>
                 <TextBlock Text="Курский Областной Клинический Кожно-Венерологический Диспансер" FontSize="16" HorizontalAlignment="Left" Margin="5 0" TextWrapping="Wrap" TextAlignment="Center"/>

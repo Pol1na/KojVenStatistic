@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace KojVenStatistic.Pages
 {
@@ -22,10 +23,14 @@ namespace KojVenStatistic.Pages
     public partial class NavigationPage : Page
     {
         private User _user;
+        private DispatcherTimer _timer = new DispatcherTimer();
         public NavigationPage()
         {
             InitializeComponent();
             _user = AppData.AuthUser;
+            _timer.Interval = new TimeSpan(0, 0, 1);
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
             UserInfo.DataContext = _user;
 
             BtnAppeal.Visibility = Visibility.Collapsed;
@@ -61,9 +66,37 @@ namespace KojVenStatistic.Pages
                     break;
             }
 
-           
-
+            CheckNotifications();
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            CheckNotifications();
+        }
+
+        private void CheckNotifications()
+        {
+            using (KojVenStatisticEntities db = new KojVenStatisticEntities())
+            {
+                var user = db.User.ToList().FirstOrDefault(x => x.Id == _user.Id);
+                if (user != null)
+                {
+                    var appeals = user.Appeal.ToList().Where(x => x.DateOfRequest.Date == DateTime.Now.Date &&
+                            x.DateOfRequest.TimeOfDay > DateTime.Now.TimeOfDay && x.Comment == null);
+                    if (appeals.Count() != 0)
+                    {
+                        BorderNotifications.Visibility = Visibility.Visible;
+                        BorderNotifications.DataContext = appeals.Count() > 9 ? "+9" : appeals.Count().ToString();
+                    }
+                    else
+                    {
+                        BorderNotifications.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+            
+        }
+
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new LoginPage());

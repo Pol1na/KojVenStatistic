@@ -9,5 +9,7 @@ namespace KojVenStatistic.Entity
     public partial class User
     {
         public string FullName => $"{LastName} {FirstName}";
+
+        
     }
 }

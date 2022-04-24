@@ -262,8 +262,6 @@
     <Resource Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\left_arrow.png" />
-    <Resource Include="Resources\left_arrow_disabled.png" />
     <Resource Include="Assets\left_arrow_disabled.png" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

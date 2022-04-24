@@ -48,7 +48,12 @@
                     <RadioButton Content="Пациенты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnClients" Click="BtnClients_Click"/>
                     <RadioButton Content="Медикаменты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnMedicaments" Click="BtnMedicaments_Click" />
                     <RadioButton Content="Записть к врачу" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnAppeal" Click="BtnAppeal_Click"/>
-                    <RadioButton Content="Список записей" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnAppealsList" Click="BtnAppealsList_Click"/>
+                    <Grid DockPanel.Dock="Top" Background="Transparent">
+                        <RadioButton Content="Список записей" Style="{StaticResource RBtnCute}"  GroupName="Navigation"  x:Name="BtnAppealsList" Click="BtnAppealsList_Click"/>
+                        <Border Background="Red" CornerRadius="100" HorizontalAlignment="Right" Margin="5" Width="20" Height="20" x:Name="BorderNotifications" Visibility="Collapsed">
+                            <TextBlock Text="{Binding}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                        </Border>
+                    </Grid>
                     <RadioButton Content="Справка" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnInfo" Click="BtnInfo_Click"/>
                     <RadioButton Content="Выход" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Bottom" x:Name="BtnExit" Click="BtnExit_Click" />
                     <Grid Background="{DynamicResource MainGreen}"/>
