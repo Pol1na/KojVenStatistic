@@ -11,5 +11,7 @@ namespace KojVenStatistic.Entity
         public string FullName => $"{LastName} {FirstName}";
 
         public string DateOfBirthText => DateOfBirth.ToLongDateString();
+
+        public Appeal LastAppeal => Appeal.Last();
     }
 }

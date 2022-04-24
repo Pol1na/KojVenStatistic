@@ -33,6 +33,7 @@ namespace KojVenStatistic.Pages
             BtnClients.Visibility = Visibility.Collapsed;
             BtnMedicaments.Visibility = Visibility.Collapsed;
             BtnUsers.Visibility = Visibility.Collapsed;
+            BtnAppealsList.Visibility = Visibility.Collapsed;
 
             switch (_user.PostId)
             {
@@ -46,6 +47,7 @@ namespace KojVenStatistic.Pages
                 case 2:
                     BtnClients.Visibility = Visibility.Visible;
                     BtnMedicaments.Visibility = Visibility.Visible;
+                    BtnAppealsList.Visibility = Visibility.Visible;
                     PageFrame.Navigate(new ClientsPage());
                     BtnClients.IsChecked = true;
                     break;
@@ -90,6 +92,11 @@ namespace KojVenStatistic.Pages
         private void BtnInfo_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnAppealsList_Click(object sender, RoutedEventArgs e)
+        {
+            PageFrame.Navigate(new AppealsListPage());
         }
     }
 }
