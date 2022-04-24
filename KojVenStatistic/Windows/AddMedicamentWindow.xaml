@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KojVenStatistic.Windows"
         mc:Ignorable="d"
-        Title="Добавление медикамента" Height="250" Width="400">
+        Title="Добавление медикамента" Height="300" Width="400">
     <Grid>
+        <TextBlock Style="{StaticResource TBlockHeader}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black">Добавление медикамента</TextBlock>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Style="{StaticResource TBlockHeader}" Foreground="Black">Добавление медикамента</TextBlock>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Название:</TextBlock>
                 <TextBox Name="TBoxName" Margin="5"></TextBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Описание:</TextBlock>
-                <TextBox Name="TBoxDescription" Margin="5"></TextBox>
+                <TextBox Name="TBoxDescription" Height="50" TextWrapping="Wrap" Margin="5"></TextBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Болезнь:</TextBlock>
-                <ComboBox Name="CBoxDisease" Width="130" DisplayMemberPath="Name" Margin="5"></ComboBox>
+                <ComboBox Name="CBoxDisease" Width="120" DisplayMemberPath="Name" Margin="5"></ComboBox>
             </StackPanel>
             <Button Name="AddBtn" Click="AddBtn_Click">Добавить</Button>
         </StackPanel>
