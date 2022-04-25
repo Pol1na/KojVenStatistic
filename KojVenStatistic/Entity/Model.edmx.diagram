@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a0397913bc647a3abaf1259a5692202" Name="Diagram1" ZoomLevel="95">
-        <EntityTypeShape EntityType="KojVenStatisticModel.Appeal" Width="1.5" PointX="5.25" PointY="6.375" />
+      <Diagram DiagramId="21c4007021d445b5894f42338c0d7c0f" Name="Diagram1">
+        <EntityTypeShape EntityType="KojVenStatisticModel.Appeal" Width="1.5" PointX="5.25" PointY="6.25" />
         <EntityTypeShape EntityType="KojVenStatisticModel.AppealType" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.Category" Width="1.5" PointX="0.75" PointY="8.25" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.Client" Width="1.5" PointX="3" PointY="8.875" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.Disease" Width="1.5" PointX="3" PointY="14.125" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Category" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Client" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Disease" Width="1.5" PointX="3" PointY="13.625" />
         <EntityTypeShape EntityType="KojVenStatisticModel.Gender" Width="1.5" PointX="0.75" PointY="4.875" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.Medicament" Width="1.5" PointX="7.5" PointY="4.125" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.MedicamentOfRecipe" Width="1.5" PointX="9.75" PointY="7.125" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.Post" Width="1.5" PointX="0.75" PointY="1.875" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.Recipe" Width="1.5" PointX="7.5" PointY="7.125" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.TypeDisease" Width="1.5" PointX="0.75" PointY="14.5" />
-        <EntityTypeShape EntityType="KojVenStatisticModel.User" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Medicament" Width="1.5" PointX="7.5" PointY="4" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.MedicamentOfRecipe" Width="1.5" PointX="9.75" PointY="7" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Post" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.Recipe" Width="1.5" PointX="7.5" PointY="7" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.TypeDisease" Width="1.5" PointX="0.75" PointY="14" />
+        <EntityTypeShape EntityType="KojVenStatisticModel.User" Width="1.5" PointX="3" PointY="3.625" />
         <AssociationConnector Association="KojVenStatisticModel.FK_Appeal_AppealType" />
         <AssociationConnector Association="KojVenStatisticModel.FK_Appeal_Client" />
         <AssociationConnector Association="KojVenStatisticModel.FK_Appeal_Disease" />

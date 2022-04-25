@@ -21,6 +21,8 @@ namespace KojVenStatistic.Pages
     /// </summary>
     public partial class UsersPage : Page
     {
+        private User user => DGUsers.SelectedItem as User;
+
         public UsersPage()
         {
             InitializeComponent();
@@ -74,17 +76,31 @@ namespace KojVenStatistic.Pages
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            Window editor = new Windows.AddEditUserWindow(null);
+            if (editor.ShowDialog() == true)
+            {
+                UpdateGrid();
+            }
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            Window editor = new Windows.AddEditUserWindow(user);
+            if (editor.ShowDialog() == true)
+            {
+                UpdateGrid();
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MessageBox.Show("Вы действительно хотите удалить данного пользователя?",
+     "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                AppData.Context.User.Remove((sender as Button).DataContext as User);
+                AppData.Context.SaveChanges();
+                UpdateGrid();
+            }
         }
 
         private void BtnReport_Click(object sender, RoutedEventArgs e)

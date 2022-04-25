@@ -121,6 +121,9 @@
     <Compile Include="Pages\AppealsListPage.xaml.cs">
       <DependentUpon>AppealsListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AddEditUserWindow.xaml.cs">
+      <DependentUpon>AddEditUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddMedicamentWindow.xaml.cs">
       <DependentUpon>AddMedicamentWindow.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
     <Compile Include="Windows\TicketPreviewWindow.xaml.cs">
       <DependentUpon>TicketPreviewWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\AddEditUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddMedicamentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -263,6 +270,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\left_arrow_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

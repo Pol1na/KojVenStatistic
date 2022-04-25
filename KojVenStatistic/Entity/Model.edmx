@@ -774,7 +774,7 @@
           <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
           <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
