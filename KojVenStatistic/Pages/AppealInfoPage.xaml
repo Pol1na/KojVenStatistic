@@ -1,0 +1,64 @@
+﻿<Page x:Class="KojVenStatistic.Pages.AppealInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KojVenStatistic.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Обращение клиента">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource TBlockHeader}" Foreground="Black" Grid.ColumnSpan="4" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Text="{Binding Client.FullName}"></TextBlock>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Дата рождения:</TextBlock>
+                <TextBlock Width="120" Name="TBlockBirth" Text="{Binding Client.DateOfBirthText}" Margin="5"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Номер телефона:</TextBlock>
+                <TextBox Name="TBoxPhone"  Margin="5" IsEnabled="False"  Text="{Binding Client.Telephone}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Адрес:</TextBlock>
+                <TextBox Name="TBoxAddress" Width="120" TextWrapping="Wrap" IsEnabled="False"  Margin="5" Text="{Binding Client.Address}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Снилс:</TextBlock>
+                <TextBox Name="TBoxSnils" IsEnabled="False"  Margin="5" Text="{Binding Client.Snils}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Мед.Полис:</TextBlock>
+                <TextBox Name="TBoxMed" IsEnabled="False"  Margin="5" Text="{Binding Client.MedPolis}"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" Name="SPOptional">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Тип приема:</TextBlock>
+                <ComboBox Width="120" Height="25" Name="CBoxType" IsEnabled="False"  Margin="5" DisplayMemberPath="Name" Text="{Binding AppealType.Name}"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Дата обращения:</TextBlock>
+                <TextBlock Name="TBlockDate" Width="120"  Margin="5" Text="{Binding RequestDateText}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Время:</TextBlock>
+                <TextBlock Name="TBlockTime" IsEnabled="False"  Margin="5" Text="{Binding RequestTimeText}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Диагноз:</TextBlock>
+                <ComboBox Name="CBoxDisease" Width="120"  Margin="5" Text="{Binding Disease.Name}" DisplayMemberPath="Name"></ComboBox>
+            </StackPanel>
+            <Button Name="BtnAddMedicine" Click="BtnAddMedicine_Click">Выписать лекарства</Button>
+        </StackPanel>
+        <Button x:Name="BtnSave" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnSave_Click">Поставить диагноз</Button>
+
+    </Grid>
+</Page>

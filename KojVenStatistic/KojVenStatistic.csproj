@@ -118,6 +118,9 @@
     <Compile Include="Entity\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AppealInfoPage.xaml.cs">
+      <DependentUpon>AppealInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AppealsListPage.xaml.cs">
       <DependentUpon>AppealsListPage.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
     <Compile Include="Windows\TicketPreviewWindow.xaml.cs">
       <DependentUpon>TicketPreviewWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\AppealInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddEditUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

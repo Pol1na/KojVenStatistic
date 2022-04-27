@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Margin="5" Width="40" Height="40" Stretch="Fill" >
+            <Image Margin="5" MouseDown="Image_MouseDown" Width="40" Height="40" Stretch="Fill" >
                 <Image.Source>
                     <Binding Path="Image">
                         <Binding.TargetNullValue>
@@ -37,7 +37,7 @@
                 </Image.Clip>
             </Image>
 
-            <TextBlock Grid.Column="1" Text="{Binding FullName}" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Margin="5"/>
+            <TextBlock Grid.Column="1" Text="{Binding FullName}" MouseDown="TextBlock_MouseDown" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Margin="5"/>
         </Grid>
 
 

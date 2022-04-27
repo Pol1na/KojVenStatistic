@@ -27,23 +27,33 @@ namespace KojVenStatistic.Pages
             LViewMedicaments.ItemsSource = AppData.Context.Medicament.ToList();
             CBoxSort.ItemsSource = new string[] { "Без сортировки", "По имени (возр.)", "По имени (убыв.)", "По описанию (возр.)", "По описанию (убыв.)" };
             CBoxSort.SelectedIndex = 0;
+            
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (AppData.AuthUser.PostId ==1)
             {
-                if (MessageBox.Show("Вы действительно хотите удалить данный препарат?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                try
                 {
-                    AppData.Context.Medicament.Remove((sender as Button).DataContext as Medicament);
-                    AppData.Context.SaveChanges();
-                    UpdateList();
+                    if (MessageBox.Show("Вы действительно хотите удалить данный препарат?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        AppData.Context.Medicament.Remove((sender as Button).DataContext as Medicament);
+                        AppData.Context.SaveChanges();
+                        UpdateList();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Произошла ошибка, попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch
+            else
             {
-                MessageBox.Show("Произошла ошибка, попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("У вас нет прав на выполнение данной операции", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
+
 
         }
 

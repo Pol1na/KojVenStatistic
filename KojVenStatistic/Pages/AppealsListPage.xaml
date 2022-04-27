@@ -9,6 +9,57 @@
       Title="Список записей">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="1" Margin="10" Name="LViewAppels" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="False" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="5" Background="{DynamicResource BackgroundColor}" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Margin="5">
+                        <Grid Width="500">
+                            <StackPanel >
+                                <TextBlock Text="{Binding Client.FullName}" FontSize="20" Margin="5" />
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="Дата приема: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding RequestDateText}" Foreground="Gray"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5 0">
+                                    <TextBlock Text="Тип приема: "  Foreground="Black"/>
+                                    <TextBlock Text="{Binding AppealType.Name}" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding RequestTimeText}" FontSize="20" Margin="5" />
+                                <Button Name="BtnMoreInfo"  Content="Карточка клиента" Width="150" HorizontalAlignment="Right" Click="BtnMoreInfo_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Background="White" Width="170" Margin="10"  HorizontalAlignment="Left">
+            <TextBlock Text="Поиск..." Margin="3 1" VerticalAlignment="Center" Foreground="Gray" x:Name="TBlockPlaceholer"/>
+            <TextBox x:Name="TBoxSearch" Background="Transparent" TextChanged="TBoxSearch_TextChanged" VerticalContentAlignment="Center" Width="170"></TextBox>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <TextBlock Text="Сортировка:" VerticalAlignment="Center"/>
+            <ComboBox Width="170" Margin="10" x:Name="CBoxSort" SelectionChanged="CBoxSort_SelectionChanged"/>
+        </StackPanel>
     </Grid>
 </Page>

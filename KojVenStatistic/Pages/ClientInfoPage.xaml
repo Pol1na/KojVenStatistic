@@ -30,7 +30,7 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата рождения:</TextBlock>
-                <DatePicker Width="120" Name="DatePickerBirth" SelectedDate="{Binding DateOfBirth}" IsEnabled="False"  Margin="5"></DatePicker>
+                <DatePicker Width="120" Name="DatePickerBirth" SelectedDate="{Binding DateOfBirth}"  Margin="5"></DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Номер телефона:</TextBlock>
@@ -61,11 +61,11 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" Name="SPOptional">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Тип приема:</TextBlock>
-                <ComboBox Width="120" Height="25" Name="CBoxType" IsEnabled="False"  Margin="5" DisplayMemberPath="Name" Text="{Binding AppealType.Name}"></ComboBox>
+                <ComboBox Width="120" Height="25" IsEnabled="False" Name="CBoxType" Margin="5" DisplayMemberPath="Name" Text="{Binding AppealType.Name}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата обращения:</TextBlock>
-                <DatePicker Name="DatePickerAppeal" Width="120" IsEnabled="False"  Margin="5" SelectedDate="{Binding DateOfRequest}"></DatePicker>
+                <DatePicker Name="DatePickerAppeal" Width="120"  Margin="5" SelectedDate="{Binding DateOfRequest}"></DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Диагноз:</TextBlock>

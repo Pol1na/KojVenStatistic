@@ -22,13 +22,13 @@ namespace KojVenStatistic.Windows
     {
         private List<Medicament> _selectedMed => LViewMedicament.ItemsSource as List<Medicament>;
         private List<Medicament> _allMed => CBoxMedicament.ItemsSource as List<Medicament>;
-        private List<MedicamentOfRecipe> _appeal;
+        private List<Medicament> _appeal;
         public AddNewMedicineForUserWindow(Appeal appeal)
         {
             InitializeComponent();
             CBoxMedicament.ItemsSource = AppData.Context.Medicament.ToList();
             //_appeal = client.Appeal.First(i => i.DateOfRequest == date).ToList();
-            _appeal = appeal.Recipe.First(i => i.AppealId == appeal.Id).MedicamentOfRecipe.ToList();
+            //_appeal = appeal.Recipe.First(i => i.AppealId == appeal.Id).MedicamentOfRecipe.ToList();
             LViewMedicament.ItemsSource = _appeal;
         }
 

@@ -34,7 +34,6 @@ namespace KojVenStatistic.Pages
             if (AppData.AuthUser.PostId == 1)
             {
                 BtnEdit.Visibility = Visibility.Visible;
-                DatePickerBirth.IsEnabled = true;
                 DatePickerAppeal.IsEnabled = true;
                 TBoxAddress.IsEnabled = true;
                 TBoxDisease.IsEnabled = true;
@@ -63,15 +62,11 @@ namespace KojVenStatistic.Pages
         private void BtnAddMedicine_Click(object sender, RoutedEventArgs e)
         {
             Window editor = new Windows.AddNewMedicineForUserWindow(_currentAppeal);
-            if (editor.ShowDialog() == true)
-            {
-
-            }
+            editor.ShowDialog();
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void BtnGoPrevious_MouseDown(object sender, MouseButtonEventArgs e)

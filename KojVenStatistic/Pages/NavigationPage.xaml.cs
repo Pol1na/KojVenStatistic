@@ -131,5 +131,24 @@ namespace KojVenStatistic.Pages
         {
             PageFrame.Navigate(new AppealsListPage());
         }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window editor = new Windows.AddEditUserWindow(AppData.AuthUser);
+            if( editor.ShowDialog() == true)
+            {
+                UserInfo.DataContext = AppData.AuthUser;
+            }
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window editor = new Windows.AddEditUserWindow(AppData.AuthUser);
+            if (editor.ShowDialog() == true)
+            {
+                UserInfo.DataContext = AppData.AuthUser;
+
+            }
+        }
     }
 }
