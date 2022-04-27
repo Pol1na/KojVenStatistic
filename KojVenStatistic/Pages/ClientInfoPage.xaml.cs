@@ -24,6 +24,7 @@ namespace KojVenStatistic.Pages
         private Client _client;
         private int _selectedPage;
         private int _pagesCount;
+        private Appeal _currentAppeal;
         public ClientInfoPage(Client client)
         {
             InitializeComponent();
@@ -61,7 +62,11 @@ namespace KojVenStatistic.Pages
 
         private void BtnAddMedicine_Click(object sender, RoutedEventArgs e)
         {
+            Window editor = new Windows.AddNewMedicineForUserWindow(_currentAppeal);
+            if (editor.ShowDialog() == true)
+            {
 
+            }
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -117,6 +122,7 @@ namespace KojVenStatistic.Pages
             try
             {
                 SPOptional.DataContext = appeals[_selectedPage];
+                _currentAppeal = appeals[_selectedPage];
             }
             catch 
             {

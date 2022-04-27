@@ -97,7 +97,7 @@ namespace KojVenStatistic.Pages
             if (MessageBox.Show("Вы действительно хотите удалить данного пользователя?",
      "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                AppData.Context.User.Remove((sender as Button).DataContext as User);
+                AppData.Context.User.Remove(user);
                 AppData.Context.SaveChanges();
                 UpdateGrid();
             }

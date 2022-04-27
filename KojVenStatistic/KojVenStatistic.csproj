@@ -127,6 +127,9 @@
     <Compile Include="Windows\AddMedicamentWindow.xaml.cs">
       <DependentUpon>AddMedicamentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AddNewMedicineForUserWindow.xaml.cs">
+      <DependentUpon>AddNewMedicineForUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ClientEditorWindow.xaml.cs">
       <DependentUpon>ClientEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AddMedicamentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddNewMedicineForUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

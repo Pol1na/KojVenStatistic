@@ -40,9 +40,9 @@
 
         </DataGrid>
         <StackPanel HorizontalAlignment="Right" Margin="10" Grid.Row="2" Orientation="Horizontal">
-            <Button Name="BtnAdd" Click="BtnAdd_Click">Добавить</Button>
-            <Button Name="BtnEdit" Click="BtnEdit_Click">Редактировать</Button>
-            <Button Name="BtnDelete" Click="BtnDelete_Click">Удалить</Button>
+            <Button Name="BtnAdd" Visibility="Collapsed" Click="BtnAdd_Click">Добавить</Button>
+            <Button Name="BtnEdit" Visibility="Collapsed" Click="BtnEdit_Click">Редактировать</Button>
+            <Button Name="BtnDelete" Visibility="Collapsed" Click="BtnDelete_Click">Удалить</Button>
             <Button Name="BtnReport" Click="BtnReport_Click">Отчет</Button>
         </StackPanel>
 
