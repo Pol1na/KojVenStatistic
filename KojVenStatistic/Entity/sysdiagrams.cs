@@ -12,16 +12,12 @@ namespace KojVenStatistic.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class AppealType
+    public partial class sysdiagrams
     {
-        public AppealType()
-        {
-            this.Appeal = new HashSet<Appeal>();
-        }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<Appeal> Appeal { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KojVenStatistic.Windows"
         mc:Ignorable="d"
-        Title="Выписывание лекарства" Height="350" Width="800">
-    <Grid>
+        Height="350" Width="450" >
+    <Grid Margin="10">
         <TextBlock Style="{StaticResource TBlockHeader}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Name="TBlockHeader"></TextBlock>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 -35 0">
@@ -18,6 +18,12 @@
                     </Button.ToolTip>
                 </Button>
             </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Margin="5">Количество в день:</TextBlock>
+                <TextBox Width="170" Margin="5" x:Name="TBoxAmount"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <ListView Name="LViewMedicament" Height="100" Margin="5" Width="170" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemsPanel>
@@ -33,7 +39,14 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Medicament.Name}" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="100"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="100">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                            <Binding Path="Medicament.Name"/>
+                                            <Binding Path="AmountPerDay"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                                 <Button Padding="0" Content="X" Width="25" Height="25" x:Name="BtnRemoveMedicament" Click="BtnRemoveMedicament_Click"/>
                             </StackPanel>
                         </DataTemplate>

@@ -98,11 +98,20 @@
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="AppealId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppealId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
@@ -253,13 +262,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
           <End Role="MedicamentOfRecipe" Type="Self.MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="AppealId" />
             </Principal>
             <Dependent Role="MedicamentOfRecipe">
               <PropertyRef Name="RecipeId" />
@@ -270,7 +277,7 @@
           <End Role="Appeal" Type="Self.Appeal" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Appeal">
               <PropertyRef Name="Id" />
@@ -334,6 +341,7 @@
           <EntitySet Name="MedicamentOfRecipe" EntityType="Self.MedicamentOfRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDisease" EntityType="Self.TypeDisease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Appeal_AppealType" Association="Self.FK_Appeal_AppealType">
@@ -408,6 +416,7 @@
           <EntitySet Name="MedicamentOfRecipe" EntityType="KojVenStatisticModel.MedicamentOfRecipe" />
           <EntitySet Name="Post" EntityType="KojVenStatisticModel.Post" />
           <EntitySet Name="Recipe" EntityType="KojVenStatisticModel.Recipe" />
+          <EntitySet Name="sysdiagrams" EntityType="KojVenStatisticModel.sysdiagrams" />
           <EntitySet Name="TypeDisease" EntityType="KojVenStatisticModel.TypeDisease" />
           <EntitySet Name="User" EntityType="KojVenStatisticModel.User" />
           <AssociationSet Name="FK_Appeal_AppealType" Association="KojVenStatisticModel.FK_Appeal_AppealType">
@@ -567,13 +576,22 @@
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="AppealId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppealId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Appeal" Relationship="KojVenStatisticModel.FK_Recipe_Appeal" FromRole="Recipe" ToRole="Appeal" />
           <NavigationProperty Name="MedicamentOfRecipe" Relationship="KojVenStatisticModel.FK_MedicamentOfRecipe_Recipe" FromRole="Recipe" ToRole="MedicamentOfRecipe" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TypeDisease">
           <Key>
@@ -662,7 +680,7 @@
           <End Type="KojVenStatisticModel.Appeal" Role="Appeal" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Appeal">
               <PropertyRef Name="Id" />
@@ -743,13 +761,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MedicamentOfRecipe_Recipe">
-          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="KojVenStatisticModel.Recipe" Role="Recipe" Multiplicity="1" />
           <End Type="KojVenStatisticModel.MedicamentOfRecipe" Role="MedicamentOfRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="AppealId" />
             </Principal>
             <Dependent Role="MedicamentOfRecipe">
               <PropertyRef Name="RecipeId" />
@@ -774,7 +790,7 @@
           <End Type="KojVenStatisticModel.Disease" Role="Disease" Multiplicity="*" />
           <End Type="KojVenStatisticModel.Medicament" Role="Medicament" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -876,7 +892,17 @@
               <MappingFragment StoreEntitySet="Recipe">
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="AppealId" ColumnName="AppealId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KojVenStatisticModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

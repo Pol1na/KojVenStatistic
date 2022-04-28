@@ -137,6 +137,7 @@ namespace KojVenStatistic.Pages
             Window editor = new Windows.AddEditUserWindow(AppData.AuthUser);
             if( editor.ShowDialog() == true)
             {
+                UserInfo.DataContext = null;
                 UserInfo.DataContext = AppData.AuthUser;
             }
         }

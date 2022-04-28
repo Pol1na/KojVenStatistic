@@ -29,6 +29,7 @@ namespace KojVenStatistic.Pages
             CBoxType.ItemsSource = AppData.Context.AppealType.ToList();
             CBoxDisease.ItemsSource = AppData.Context.Disease.ToList();
             _appeal = appeal;
+            BtnAddMedicine.IsEnabled = CBoxDisease.SelectedIndex != -1;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -40,8 +41,21 @@ namespace KojVenStatistic.Pages
 
         private void BtnAddMedicine_Click(object sender, RoutedEventArgs e)
         {
-            Window editor = new Windows.AddNewMedicineForUserWindow(_appeal);
-            editor.ShowDialog();
+            if(_appeal.Recipe == null)
+            {
+                Window editor = new Windows.AddNewMedicineForUserWindow(_appeal);
+                editor.ShowDialog();
+            }
+            else
+            {
+                Window editor = new Windows.AddNewMedicineForUserWindow(_appeal);
+                editor.ShowDialog();
+            }
+        }
+
+        private void CBoxDisease_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BtnAddMedicine.IsEnabled = CBoxDisease.SelectedIndex != -1;
         }
     }
 }

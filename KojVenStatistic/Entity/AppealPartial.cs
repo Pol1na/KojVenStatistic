@@ -10,5 +10,7 @@ namespace KojVenStatistic.Entity
     {
         public string RequestDateText => DateOfRequest.ToLongDateString();
         public string RequestTimeText => DateOfRequest.ToLongTimeString();
+        public bool HasRecipe => Recipe != null;
+        public string CreateRecipeText => HasRecipe ? "Редактирование рецепта" : "Выписывание рецепта";
     }
 }
