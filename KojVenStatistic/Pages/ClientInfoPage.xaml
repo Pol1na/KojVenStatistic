@@ -30,31 +30,31 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата рождения:</TextBlock>
-                <TextBox Width="120" Name="DatePickerBirth" Text="{Binding DateOfBirthText, Mode=OneWay}" IsEnabled="False"  Margin="5"></TextBox>
+                <TextBox Width="120" Name="DatePickerBirth" Text="{Binding DateOfBirthText, Mode=OneWay}" IsReadOnly="True"  Margin="5"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Номер телефона:</TextBlock>
-                <TextBox Name="TBoxPhone"  Margin="5" IsEnabled="False"  Text="{Binding Telephone}"></TextBox>
+                <TextBox Name="TBoxPhone"  Margin="5"  Text="{Binding Telephone}" IsReadOnly="True"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Адрес:</TextBlock>
-                <TextBox Name="TBoxAddress" IsEnabled="False"  Margin="5" Text="{Binding Address}"></TextBox>
+                <TextBox Name="TBoxAddress"   Margin="5" Text="{Binding Address}" IsReadOnly="True"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Номер паспорта:</TextBlock>
-                <TextBox Name="TBoxPassportNumber" IsEnabled="False"  Margin="5" Text="{Binding PassportNumber}"></TextBox>
+                <TextBox Name="TBoxPassportNumber" IsReadOnly="True"  Margin="5" Text="{Binding PassportNumber}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Серия паспорта:</TextBlock>
-                <TextBox Name="TBoxPassportSerial" IsEnabled="False"  Margin="5" Text="{Binding PassportSeria}"></TextBox>
+                <TextBox Name="TBoxPassportSerial" IsReadOnly="True"  Margin="5" Text="{Binding PassportSeria}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Снилс:</TextBlock>
-                <TextBox Name="TBoxSnils" IsEnabled="False"  Margin="5" Text="{Binding Snils}"></TextBox>
+                <TextBox Name="TBoxSnils" IsReadOnly="True"  Margin="5" Text="{Binding Snils}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Мед.Полис:</TextBlock>
-                <TextBox Name="TBoxMed" IsEnabled="False"  Margin="5" Text="{Binding MedPolis}"></TextBox>
+                <TextBox Name="TBoxMed" IsReadOnly="True" Margin="5" Text="{Binding MedPolis}"></TextBox>
             </StackPanel>
         </StackPanel>
         <TextBlock Text="Жалоб не было" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" x:Name="TBlockEmpty" Visibility="Collapsed"/>
@@ -65,11 +65,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата обращения:</TextBlock>
-                <TextBox IsEnabled="False" Name="DatePickerAppeal" Width="120"  Margin="5" Text="{Binding RequestDateText,Mode=OneWay}"></TextBox>
+                <TextBox IsReadOnly="True" Name="DatePickerAppeal" Width="120"  Margin="5" Text="{Binding RequestDateText,Mode=OneWay}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Диагноз:</TextBlock>
-                <TextBox Name="TBoxDisease" Width="120" IsEnabled="False"  Margin="5" Text="{Binding Disease.Name}"></TextBox>
+                <TextBox Name="TBoxDisease" Width="120" IsReadOnly="True"  Margin="5" Text="{Binding DiseaseText,Mode=OneWay}"></TextBox>
             </StackPanel>
         </StackPanel>
         <Button x:Name="BtnEdit" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnEdit_Click">Редактировать</Button>

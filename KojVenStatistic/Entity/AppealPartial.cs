@@ -30,5 +30,7 @@ namespace KojVenStatistic.Entity
 
         public bool IsActive => !DateOfFinish.HasValue;
 
+        public string DiseaseText => Disease?.Name ?? "Не поставлен";
+
     }
 }

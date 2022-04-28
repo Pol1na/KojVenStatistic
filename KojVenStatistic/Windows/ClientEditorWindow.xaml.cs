@@ -20,6 +20,8 @@ namespace KojVenStatistic.Windows
     /// </summary>
     public partial class ClientEditorWindow : Window
     {
+        private Client _client = null;
+        private bool _isCreating => _client == null;
         public ClientEditorWindow()
         {
             InitializeComponent();
@@ -37,6 +39,23 @@ namespace KojVenStatistic.Windows
             InitializeComponent();
             InitializeUI();
             TBoxSnils.Text = client.Snils;
+
+            TBoxName.Text = client.FirstName;
+            TBoxSurname.Text = client.LastName;
+
+
+            TBoxPassportNumber.Text = client.PassportNumber;
+            TBoxPassportSeria.Text = client.PassportSeria;
+            TBoxAddress.Text = client.Address;
+
+            DPickerDateOfBirth.SelectedDate = client.DateOfBirth;
+            TBoxTelephone.Text = client.Telephone;
+            TBoxMedPolis.Text = client.MedPolis;
+            CBoxGender.Text = client.Gender.Name;
+            BtnAddClient.Content = "Редактировать клиента";
+            Title = "Редактирование клиента";
+            TBoxSnils.IsEnabled = false;
+            _client = client;
         }
 
         public void InitializeUI()
@@ -58,26 +77,34 @@ namespace KojVenStatistic.Windows
             if (DPickerDateOfBirth.SelectedDate == null) errors += "Выберите дату рождения\n";
             if (string.IsNullOrWhiteSpace(TBoxTelephone.Text)) errors += "Заполните поле Номер телефона\n";
             if (string.IsNullOrWhiteSpace(TBoxMedPolis.Text)) errors += "Заполните поле Номер полиса\n";
-            if (AppData.Context.Client.ToList().FirstOrDefault(x => x.Snils == TBoxSnils.Text) != null) 
-                errors += "Клиент c данным СНИЛСом уже есть\n";
+            if(_client == null)
+            {
+                if (AppData.Context.Client.ToList().FirstOrDefault(x => x.Snils == TBoxSnils.Text) != null) 
+                    errors += "Клиент c данным СНИЛСом уже есть\n";
+            }
 
             if(errors == "")
             {
                 try
                 {
-                    Client client = new Client();
-                    client.Snils = TBoxSnils.Text;
-                    client.LastName = TBoxSurname.Text;
-                    client.FirstName = TBoxName.Text;
-                    client.PassportSeria = TBoxPassportSeria.Text;
-                    client.PassportNumber = TBoxPassportNumber.Text;
-                    client.Address = TBoxAddress.Text;
-                    client.DateOfBirth = DPickerDateOfBirth.SelectedDate.Value;
-                    client.Telephone = TBoxTelephone.Text;
-                    client.MedPolis = TBoxMedPolis.Text;
-                    client.Gender = CBoxGender.SelectedItem as Gender;
+                    if(_isCreating)
+                        _client = new Client();
 
-                    AppData.Context.Client.Add(client);
+
+                    _client.Snils = TBoxSnils.Text;
+                    _client.LastName = TBoxSurname.Text;
+                    _client.FirstName = TBoxName.Text;
+                    _client.PassportSeria = TBoxPassportSeria.Text;
+                    _client.PassportNumber = TBoxPassportNumber.Text;
+                    _client.Address = TBoxAddress.Text;
+                    _client.DateOfBirth = DPickerDateOfBirth.SelectedDate.Value;
+                    _client.Telephone = TBoxTelephone.Text;
+                    _client.MedPolis = TBoxMedPolis.Text;
+                    _client.Gender = CBoxGender.SelectedItem as Gender;
+
+                    if (_isCreating)
+                        AppData.Context.Client.Add(_client);
+
                     AppData.Context.SaveChanges();
                     DialogResult = true;
                     Close();
