@@ -39,6 +39,16 @@ namespace KojVenStatistic.Pages
             {
                 BtnEdit.Visibility = Visibility.Collapsed;
             }
+
+            if(AppData.AuthUser.PostId == 3)
+            {
+                BtnReport.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnReport.Visibility = Visibility.Collapsed;
+            }
+
             _client = client;
 
 
@@ -136,6 +146,11 @@ namespace KojVenStatistic.Pages
             {
 
             }
+        }
+
+        private void BtnReport_Click(object sender, RoutedEventArgs e)
+        {
+            new Windows.CreateDoctorVisitSertificateWindow(_currentAppeal).ShowDialog();
         }
     }
 }

@@ -29,8 +29,10 @@ namespace KojVenStatistic.Entity
         }
 
         public bool IsActive => !DateOfFinish.HasValue;
+        public string DateOfFinishText => DateOfFinish.HasValue ? DateOfFinish.Value.ToLongDateString() : "Находтся на учете";
 
         public string DiseaseText => Disease?.Name ?? "Не поставлен";
+        public string TypeDiseaseText => Disease?.TypeDisease.Name ?? " - ";
 
     }
 }

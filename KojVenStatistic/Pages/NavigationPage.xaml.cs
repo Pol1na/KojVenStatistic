@@ -34,7 +34,6 @@ namespace KojVenStatistic.Pages
             UserInfo.DataContext = _user;
 
             BtnAppeal.Visibility = Visibility.Collapsed;
-            BtnInfo.Visibility = Visibility.Collapsed;
             BtnClients.Visibility = Visibility.Collapsed;
             BtnMedicaments.Visibility = Visibility.Collapsed;
             BtnUsers.Visibility = Visibility.Collapsed;
@@ -58,7 +57,7 @@ namespace KojVenStatistic.Pages
                     break;
                 case 3:
                     BtnAppeal.Visibility = Visibility.Visible;
-                    BtnInfo.Visibility = Visibility.Visible;
+                    BtnClients.Visibility = Visibility.Visible;
                     PageFrame.Navigate(new AppealPage());
                     BtnAppeal.IsChecked = true;
                     break;

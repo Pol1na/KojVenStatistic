@@ -1,0 +1,73 @@
+﻿<Window x:Class="KojVenStatistic.Windows.CreateDoctorVisitSertificateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KojVenStatistic.Windows"
+        mc:Ignorable="d"
+        Title="Справка о посещении врача" Height="400" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Background="White" x:Name="VisitSertificate" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding RequestDateText, Mode=OneWay}" HorizontalAlignment="Right" Margin="10"></TextBlock>
+            <TextBlock Text="Справка" Grid.Row="1" Style="{StaticResource TBlockHeader}" Foreground="Black" HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="2" Margin="5">
+                <Border  BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock >
+                            <Run Text="Выдана гр.:"/>
+                            <Run Text="{Binding Client.FullName, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock>
+                        <Run Text="дата рождения:"/>
+                        <Run Text="{Binding Client.DateOfBirthText, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock >
+                        <Run Text="о том, что он(а):"/>
+                        <Run Text=" 1. Был(а) на приеме у врача - "/>
+                        <Run Text="{Binding User.FullName, Mode=OneWay}"/>
+                        <Run Text="("/>
+                        <Run Text="{Binding User.Category.Name, Mode=OneWay}"/>
+                        <Run Text=")"/>
+                    </TextBlock>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock >
+                        <Run Text="2. Диагноз:"/>
+                        <Run Text="{Binding DiseaseText, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock >
+                        <Run Text="3. Тип заболевания:"/>
+                        <Run Text="{Binding TypeDiseaseText, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock >
+                        <Run Text="4. Дата выздоровления:"/>
+                        <Run Text="{Binding DateOfFinishText, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0 0 0 1">
+                    <TextBlock >
+                        <Run Text="5. Дополнительные сведения:"/>
+                        <Run Text="{Binding Comment, TargetNullValue=' - ', Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Button Grid.Row="1" HorizontalAlignment="Right" Content="Печать" x:Name="BtnPrint" Click="BtnPrint_Click"/>
+    </Grid>
+</Window>

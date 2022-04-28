@@ -73,6 +73,7 @@
             </StackPanel>
         </StackPanel>
         <Button x:Name="BtnEdit" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnEdit_Click">Редактировать</Button>
+        <Button x:Name="BtnReport" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnReport_Click">Формирование справки</Button>
 
     </Grid>
 </Page>
