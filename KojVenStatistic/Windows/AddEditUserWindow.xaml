@@ -59,7 +59,7 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
-            <Image Name="ImageUser" Width="200" Height="200" Stretch="UniformToFill">
+            <Image Name="ImageUser" Width="200" Height="200" Stretch="Fill" Margin="5">
                 <Image.Source>
                     <Binding>
                         <Binding.TargetNullValue>
