@@ -28,15 +28,24 @@ namespace KojVenStatistic.Pages
             this.DataContext = appeal;
             CBoxType.ItemsSource = AppData.Context.AppealType.ToList();
             CBoxDisease.ItemsSource = AppData.Context.Disease.ToList();
+            CBoxDisease.SelectedItem = appeal.Disease;
+            ChBoxIsActive.IsChecked = !appeal.IsActive;
+            ChBoxIsActive.IsEnabled = appeal.IsActive && DateTime.Now > appeal.DateOfRequest;
             _appeal = appeal;
+
             BtnAddMedicine.IsEnabled = CBoxDisease.SelectedIndex != -1;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             _appeal.Disease = CBoxDisease.SelectedItem as Disease;
+            if(ChBoxIsActive.IsChecked == true)
+            {
+                _appeal.DateOfFinish = DateTime.Now;
+            }
             AppData.Context.SaveChanges();
-            MessageBox.Show("Диагноз поставлен");
+            MessageBox.Show("Диагноз поставлен", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigationService.GoBack();
         }
 
         private void BtnAddMedicine_Click(object sender, RoutedEventArgs e)
@@ -56,6 +65,11 @@ namespace KojVenStatistic.Pages
         private void CBoxDisease_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BtnAddMedicine.IsEnabled = CBoxDisease.SelectedIndex != -1;
+        }
+
+        private void ChBoxIsActive_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

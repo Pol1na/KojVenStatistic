@@ -15,7 +15,29 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="1" Margin="10" Name="LViewAppels" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="1" Margin="10" Name="LViewAppels" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.GroupStyle>
+                <GroupStyle>
+                <GroupStyle.ContainerStyle>
+                    <Style TargetType="GroupItem">
+                            <Setter Property="Template">
+                            <Setter.Value>
+                                    <ControlTemplate TargetType="GroupItem">
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <TextBlock Text="{Binding Name}" FontSize="20"  Margin="5" />
+                                            </Expander.Header>
+                                        <Expander.Content>
+                                            <ItemsPresenter/>
+                                        </Expander.Content>
+                                    </Expander>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
@@ -56,10 +78,10 @@
             <TextBlock Text="Поиск..." Margin="3 1" VerticalAlignment="Center" Foreground="Gray" x:Name="TBlockPlaceholer"/>
             <TextBox x:Name="TBoxSearch" Background="Transparent" TextChanged="TBoxSearch_TextChanged" VerticalContentAlignment="Center" Width="170"></TextBox>
         </Grid>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <CheckBox x:Name="ChBoxIsActive" Content="Только активные" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="15" Background="White" VerticalContentAlignment="Center" IsChecked="True" Click="ChBoxIsActive_Click"/>
+        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
             <TextBlock Text="Сортировка:" VerticalAlignment="Center"/>
             <ComboBox Width="170" Margin="10" x:Name="CBoxSort" SelectionChanged="CBoxSort_SelectionChanged"/>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Page>

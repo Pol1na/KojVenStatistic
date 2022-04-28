@@ -24,9 +24,10 @@ namespace KojVenStatistic.Pages
         public AppealsListPage()
         {
             InitializeComponent();
+            /*
             CBoxSort.ItemsSource = new string[] { "Без сортировки", "По имени (возр.)", "По имени (убыв.)", "По дате обращения (возр.)", "По дате обращения (убыв.)" };
-            CBoxSort.SelectedIndex = 0;
-            LViewAppels.ItemsSource = AppData.AuthUser.Appeal.ToList();
+            CBoxSort.SelectedIndex = 0;*/
+            UpdateList();
         }
 
         private void BtnMoreInfo_Click(object sender, RoutedEventArgs e)
@@ -51,12 +52,18 @@ namespace KojVenStatistic.Pages
         }
         private void UpdateList()
         {
-            List<Appeal> appeals = AppData.AuthUser.Appeal.ToList();
+            List<Appeal> appeals = AppData.AuthUser.Appeal.ToList().OrderBy(x => x.DateOfRequest).ToList();
+
+            if(ChBoxIsActive.IsChecked == true)
+                appeals = appeals.Where(x => x.IsActive).ToList();
 
             string text = TBoxSearch.Text.ToLower();
             if (!string.IsNullOrWhiteSpace(text))
                 appeals = appeals.Where(x => x.Client.FullName.ToLower().Contains(text) || x.RequestDateText.ToLower().Contains(text) || x.AppealType.Name.ToLower().Contains(text)).ToList();
-
+            
+            
+            
+            /*
             switch (CBoxSort.SelectedIndex)
             {
                 case 1:
@@ -73,10 +80,16 @@ namespace KojVenStatistic.Pages
                     break;
                 default:
                     break;
-            }
+            }*/
 
+            ListCollectionView collectionView = new ListCollectionView(appeals);
+            collectionView.GroupDescriptions.Add(new PropertyGroupDescription("AppealDateText"));
+            LViewAppels.ItemsSource = collectionView;
+        }
 
-            LViewAppels.ItemsSource = appeals;
+        private void ChBoxIsActive_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateList();
         }
     }
 }

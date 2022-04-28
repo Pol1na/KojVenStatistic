@@ -54,8 +54,9 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Диагноз:</TextBlock>
-                <ComboBox Name="CBoxDisease" Width="120"  Margin="5" Text="{Binding Disease.Name}" DisplayMemberPath="Name" SelectionChanged="CBoxDisease_SelectionChanged"/>
+                <ComboBox Name="CBoxDisease" Width="120"  Margin="5" DisplayMemberPath="Name" SelectionChanged="CBoxDisease_SelectionChanged"/>
             </StackPanel>
+            <CheckBox Content="Выздоровел" HorizontalAlignment="Right" Margin="5" VerticalContentAlignment="Center" x:Name="ChBoxIsActive" Checked="ChBoxIsActive_Checked"/>
             <Button Name="BtnAddMedicine" Click="BtnAddMedicine_Click" Content="{Binding CreateRecipeText}"/>
         </StackPanel>
         <Button x:Name="BtnSave" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnSave_Click">Поставить диагноз</Button>

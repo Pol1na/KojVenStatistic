@@ -12,5 +12,21 @@ namespace KojVenStatistic.Entity
         public string RequestTimeText => DateOfRequest.ToLongTimeString();
         public bool HasRecipe => Recipe != null;
         public string CreateRecipeText => HasRecipe ? "Редактирование рецепта" : "Выписывание рецепта";
+
+        public string AppealDateText
+        {
+            get
+            {
+                var currentDate = DateTime.Now.Date;
+                if (currentDate == DateOfRequest.Date) return "Сегодня";
+                else if (currentDate == DateOfRequest.Date.AddDays(-1)) return "Завтра";
+                else if (currentDate == DateOfRequest.Date.AddDays(-2)) return "Послезавтра";
+                else if (currentDate == DateOfRequest.Date.AddDays(1)) return "Вчера";
+                else if (currentDate == DateOfRequest.Date.AddDays(2)) return "Позавчера";
+                else return RequestDateText;
+            }
+        }
+
+        public bool IsActive => !DateOfFinish.HasValue;
     }
 }
