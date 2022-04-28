@@ -32,6 +32,13 @@ namespace KojVenStatistic.Windows
             TBoxSnils.Text = snils.Substring(0, 14);
         }
 
+        public ClientEditorWindow(Client client)
+        {
+            InitializeComponent();
+            InitializeUI();
+            TBoxSnils.Text = client.Snils;
+        }
+
         public void InitializeUI()
         {
             CBoxGender.ItemsSource = AppData.Context.Gender.ToList();

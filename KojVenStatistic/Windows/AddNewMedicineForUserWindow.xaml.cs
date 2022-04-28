@@ -45,7 +45,7 @@ namespace KojVenStatistic.Windows
         {
             if (CBoxMedicament.SelectedItem is Medicament medicament)
             {
-                if (int.TryParse(TBoxAmount.Text, out int amount) && amount > 1 && amount <= 20)
+                if (int.TryParse(TBoxAmount.Text, out int amount) && amount >= 1 && amount <= 20)
                 {
                     _currentMedicamentOfRecipes.Add(new MedicamentOfRecipe() { Medicament = medicament, AmountPerDay = amount });
 
@@ -109,7 +109,7 @@ namespace KojVenStatistic.Windows
                     MessageBox.Show("Рецепт не может быть пустым", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show($"Произошла ошибка при добавлении рецепта в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }

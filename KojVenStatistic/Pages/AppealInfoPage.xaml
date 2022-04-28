@@ -39,6 +39,7 @@
             </StackPanel>
         </StackPanel>
 
+        
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" Name="SPOptional">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Тип приема:</TextBlock>
@@ -46,17 +47,17 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата обращения:</TextBlock>
-                <TextBlock Name="TBlockDate" Width="120"  Margin="5" Text="{Binding RequestDateText}"></TextBlock>
+                <TextBlock Name="TBlockDate" Width="120"  Margin="5" Text="{Binding RequestDateText, Mode=OneWay}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Время:</TextBlock>
-                <TextBlock Name="TBlockTime" IsEnabled="False"  Margin="5" Text="{Binding RequestTimeText}"></TextBlock>
+                <TextBlock Name="TBlockTime" IsEnabled="False"  Margin="5" Text="{Binding RequestTimeText, Mode=OneWay}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Диагноз:</TextBlock>
                 <ComboBox Name="CBoxDisease" Width="120"  Margin="5" DisplayMemberPath="Name" SelectionChanged="CBoxDisease_SelectionChanged"/>
             </StackPanel>
-            <CheckBox Content="Выздоровел" HorizontalAlignment="Right" Margin="5" VerticalContentAlignment="Center" x:Name="ChBoxIsActive" Checked="ChBoxIsActive_Checked"/>
+            <CheckBox Content="Выздоровел" HorizontalAlignment="Right" Margin="5" VerticalContentAlignment="Center" x:Name="ChBoxIsActive"/>
             <Button Name="BtnAddMedicine" Click="BtnAddMedicine_Click" Content="{Binding CreateRecipeText}"/>
         </StackPanel>
         <Button x:Name="BtnSave" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnSave_Click">Поставить диагноз</Button>

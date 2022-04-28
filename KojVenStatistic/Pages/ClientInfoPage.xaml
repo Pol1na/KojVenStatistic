@@ -30,7 +30,7 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата рождения:</TextBlock>
-                <DatePicker Width="120" Name="DatePickerBirth" SelectedDate="{Binding DateOfBirth}"  Margin="5"></DatePicker>
+                <TextBox Width="120" Name="DatePickerBirth" Text="{Binding DateOfBirthText, Mode=OneWay}" IsEnabled="False"  Margin="5"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Номер телефона:</TextBlock>
@@ -57,7 +57,7 @@
                 <TextBox Name="TBoxMed" IsEnabled="False"  Margin="5" Text="{Binding MedPolis}"></TextBox>
             </StackPanel>
         </StackPanel>
-
+        <TextBlock Text="Жалоб не было" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" x:Name="TBlockEmpty" Visibility="Collapsed"/>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" Name="SPOptional">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Тип приема:</TextBlock>
@@ -65,15 +65,14 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Дата обращения:</TextBlock>
-                <DatePicker Name="DatePickerAppeal" Width="120"  Margin="5" SelectedDate="{Binding DateOfRequest}"></DatePicker>
+                <TextBox IsEnabled="False" Name="DatePickerAppeal" Width="120"  Margin="5" Text="{Binding RequestDateText,Mode=OneWay}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Margin="5">Диагноз:</TextBlock>
                 <TextBox Name="TBoxDisease" Width="120" IsEnabled="False"  Margin="5" Text="{Binding Disease.Name}"></TextBox>
             </StackPanel>
-            <Button Name="BtnAddMedicine" Click="BtnAddMedicine_Click">Выписать лекарства</Button>
         </StackPanel>
-        <Button x:Name="BtnEdit" Grid.ColumnSpan="2" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnEdit_Click">Редактировать</Button>
+        <Button x:Name="BtnEdit" Grid.ColumnSpan="4" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10" Click="BtnEdit_Click">Редактировать</Button>
 
     </Grid>
 </Page>

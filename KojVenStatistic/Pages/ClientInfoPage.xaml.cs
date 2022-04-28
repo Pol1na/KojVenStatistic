@@ -33,16 +33,7 @@ namespace KojVenStatistic.Pages
             CBoxType.ItemsSource = AppData.Context.AppealType.ToList();
             if (AppData.AuthUser.PostId == 1)
             {
-                BtnEdit.Visibility = Visibility.Visible;
-                DatePickerAppeal.IsEnabled = true;
-                TBoxAddress.IsEnabled = true;
-                TBoxDisease.IsEnabled = true;
-                TBoxMed.IsEnabled = true;
-                TBoxPassportNumber.IsEnabled = true;
-                TBoxPassportSerial.IsEnabled = true;
-                TBoxPhone.IsEnabled = true;
-                TBoxSnils.IsEnabled = true;
-                CBoxType.IsEnabled = true;
+                BtnEdit.Visibility = Visibility.Visible;  
             }
             else
             {
@@ -54,6 +45,17 @@ namespace KojVenStatistic.Pages
 
             _pagesCount = client.Appeal.Count();
             _selectedPage = _pagesCount - 1; 
+            
+            if(_pagesCount == 0)
+            {
+                TBlockEmpty.Visibility = Visibility.Visible;
+                SPOptional.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                TBlockEmpty.Visibility = Visibility.Collapsed;
+                SPOptional.Visibility = Visibility.Visible;
+            }
 
             ChangePage();
             UpdateArrows();
@@ -67,6 +69,11 @@ namespace KojVenStatistic.Pages
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
+            if(new Windows.ClientEditorWindow(_client).ShowDialog() == true)
+            {
+                DataContext = null;
+                DataContext = _client;
+            }
         }
 
         private void BtnGoPrevious_MouseDown(object sender, MouseButtonEventArgs e)
@@ -107,6 +114,12 @@ namespace KojVenStatistic.Pages
             }
             else
             {
+                BtnGoPrevious.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow_disabled.png", UriKind.Relative));
+            }
+
+            if(_pagesCount == 0)
+            {
+                BtnGoNext.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow_disabled.png", UriKind.Relative));
                 BtnGoPrevious.Source = new BitmapImage(new Uri("/KojVenStatistic;component/Assets/left_arrow_disabled.png", UriKind.Relative));
             }
         }

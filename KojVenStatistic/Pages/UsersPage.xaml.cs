@@ -107,5 +107,12 @@ namespace KojVenStatistic.Pages
         {
 
         }
+
+        private void DGUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var value = DGUsers.SelectedItem != null;
+            BtnDelete.IsEnabled = value;
+            BtnEdit.IsEnabled = value;
+        }
     }
 }

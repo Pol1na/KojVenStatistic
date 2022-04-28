@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace KojVenStatistic.Entity
 {
@@ -28,5 +29,6 @@ namespace KojVenStatistic.Entity
         }
 
         public bool IsActive => !DateOfFinish.HasValue;
+
     }
 }

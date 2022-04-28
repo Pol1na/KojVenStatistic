@@ -25,7 +25,7 @@
             <ComboBox Width="170" Margin="10" x:Name="CBoxCategories" DisplayMemberPath="Name" SelectionChanged="TBoxCategories_SelectionChanged"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" Margin="10,10,10,10" Name="DGUsers" AutoGenerateColumns="False" IsReadOnly="True" >
+        <DataGrid Grid.Row="1" Margin="10,10,10,10" Name="DGUsers" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="DGUsers_SelectionChanged" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Код" Binding="{Binding Id}" Width="auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Полное имя" Binding="{Binding FullName}" Width="auto"></DataGridTextColumn>
@@ -41,8 +41,8 @@
         </DataGrid>
         <StackPanel HorizontalAlignment="Right" Margin="10" Grid.Row="2" Orientation="Horizontal">
             <Button Name="BtnAdd" Visibility="Collapsed" Click="BtnAdd_Click">Добавить</Button>
-            <Button Name="BtnEdit" Visibility="Collapsed" Click="BtnEdit_Click">Редактировать</Button>
-            <Button Name="BtnDelete" Visibility="Collapsed" Click="BtnDelete_Click">Удалить</Button>
+            <Button Name="BtnEdit" Visibility="Collapsed" Click="BtnEdit_Click" IsEnabled="False">Редактировать</Button>
+            <Button Name="BtnDelete" Visibility="Collapsed" Click="BtnDelete_Click" IsEnabled="False">Удалить</Button>
             <Button Name="BtnReport" Click="BtnReport_Click">Отчет</Button>
         </StackPanel>
 

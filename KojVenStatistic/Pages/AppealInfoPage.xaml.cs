@@ -28,10 +28,11 @@ namespace KojVenStatistic.Pages
             this.DataContext = appeal;
             CBoxType.ItemsSource = AppData.Context.AppealType.ToList();
             CBoxDisease.ItemsSource = AppData.Context.Disease.ToList();
+            _appeal = appeal;
             CBoxDisease.SelectedItem = appeal.Disease;
             ChBoxIsActive.IsChecked = !appeal.IsActive;
-            ChBoxIsActive.IsEnabled = appeal.IsActive && DateTime.Now > appeal.DateOfRequest;
-            _appeal = appeal;
+            ChBoxIsActive.IsEnabled = appeal.IsActive && DateTime.Now > appeal.DateOfRequest && CBoxDisease.SelectedIndex != -1;
+            
 
             BtnAddMedicine.IsEnabled = CBoxDisease.SelectedIndex != -1;
         }
@@ -65,11 +66,8 @@ namespace KojVenStatistic.Pages
         private void CBoxDisease_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BtnAddMedicine.IsEnabled = CBoxDisease.SelectedIndex != -1;
+            ChBoxIsActive.IsEnabled = _appeal.IsActive && DateTime.Now > _appeal.DateOfRequest && CBoxDisease.SelectedIndex != -1;
         }
 
-        private void ChBoxIsActive_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
