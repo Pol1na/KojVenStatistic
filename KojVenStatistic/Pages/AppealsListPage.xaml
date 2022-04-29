@@ -79,10 +79,5 @@
             <TextBox x:Name="TBoxSearch" Background="Transparent" TextChanged="TBoxSearch_TextChanged" VerticalContentAlignment="Center" Width="170"></TextBox>
         </Grid>
         <CheckBox x:Name="ChBoxIsActive" Content="Только активные" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="15" Background="White" VerticalContentAlignment="Center" IsChecked="True" Click="ChBoxIsActive_Click"/>
-        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <TextBlock Text="Сортировка:" VerticalAlignment="Center"/>
-            <ComboBox Width="170" Margin="10" x:Name="CBoxSort" SelectionChanged="CBoxSort_SelectionChanged"/>
-        </StackPanel>-->
-        <Button Grid.Row="2" HorizontalAlignment="Right" Margin="10 5" x:Name="BtnReport" Content="Сформировать отчет" Click="BtnReport_Click"/>
     </Grid>
 </Page>

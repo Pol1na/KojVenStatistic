@@ -11,12 +11,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
 
-        <WindowsFormsHost x:Name="Host">
+        <WindowsFormsHost x:Name="Host" Grid.Row="1" Margin="5">
             <chart:Chart x:Name="GistoChart">
                 <chart:Chart.Legends>
                     <chart:Legend></chart:Legend>
@@ -27,6 +28,11 @@
             </chart:Chart>
         </WindowsFormsHost>
 
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+            <TextBlock Margin="5" Text="Врач:"/>
+            <ComboBox x:Name="CBoxDoctors" Width="170" VerticalAlignment="Center" SelectionChanged="CBoxDoctors_SelectionChanged" DisplayMemberPath="FullName"/>
+        </StackPanel>
+        
         <Button x:Name="BtnPrint" Click="BtnPrint_Click" Grid.Row="2" HorizontalAlignment="Right" Content="Печать"/>
     </Grid>
 </Page>

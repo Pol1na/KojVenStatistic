@@ -38,6 +38,7 @@ namespace KojVenStatistic.Pages
             BtnMedicaments.Visibility = Visibility.Collapsed;
             BtnUsers.Visibility = Visibility.Collapsed;
             BtnAppealsList.Visibility = Visibility.Collapsed;
+            BtnStatistics.Visibility = Visibility.Collapsed;
 
             switch (_user.PostId)
             {
@@ -45,6 +46,7 @@ namespace KojVenStatistic.Pages
                     BtnUsers.Visibility = Visibility.Visible;
                     BtnClients.Visibility = Visibility.Visible;
                     BtnMedicaments.Visibility = Visibility.Visible;
+                    BtnStatistics.Visibility= Visibility.Visible;
                     PageFrame.Navigate(new UsersPage());
                     BtnUsers.IsChecked = true;
                     break;
@@ -121,11 +123,6 @@ namespace KojVenStatistic.Pages
             PageFrame.Navigate(new AppealPage());
         }
 
-        private void BtnInfo_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnAppealsList_Click(object sender, RoutedEventArgs e)
         {
             PageFrame.Navigate(new AppealsListPage());
@@ -150,6 +147,11 @@ namespace KojVenStatistic.Pages
                 UserInfo.DataContext = AppData.AuthUser;
 
             }
+        }
+
+        private void BtnStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            PageFrame.Navigate(new ReportClientsPage());
         }
     }
 }

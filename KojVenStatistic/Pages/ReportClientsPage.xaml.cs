@@ -21,21 +21,29 @@ namespace KojVenStatistic.Pages
     /// </summary>
     public partial class ReportClientsPage : Page
     {
-        public ReportClientsPage(List<Appeal> appeals)
+        public ReportClientsPage()
         {
             InitializeComponent();
+            List<User> users = AppData.Context.User.Where(x => x.PostId == 2).ToList();
+            users.Insert(0, new User { LastName = "Все врачи", });
+            CBoxDoctors.ItemsSource = users;
+            CBoxDoctors.SelectedIndex = 0;
+        }
+
+        private void CreateGrafics(List<Appeal> appeals)
+        {
+            GistoChart.Series.Clear();
             var appealsByDiseases = appeals.GroupBy(x => x.DiseaseText).ToList();
 
             foreach (var appealsByDisease in appealsByDiseases)
             {
+                
                 var currSeries = GistoChart.Series.Add(appealsByDisease.Key);
                 foreach (var appeal in appealsByDisease)
                 {
                     currSeries.Points.AddXY(appeal.DateOfRequest.Date, appealsByDisease.Where(x => appeal.DateOfRequest.Date == x.DateOfRequest.Date).Count());
                 }
             }
-
-        
         }
 
         private void BtnPrint_Click(object sender, RoutedEventArgs e)
@@ -45,7 +53,16 @@ namespace KojVenStatistic.Pages
             {
                 dialog.PrintVisual(Host, "Статистика");
             }
-            NavigationService.GoBack();
+        }
+
+        private void CBoxDoctors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Appeal> appeals = AppData.Context.Appeal.ToList();
+
+            if(CBoxDoctors.SelectedIndex != 0)
+                appeals = appeals.Where(x => x.User == CBoxDoctors.SelectedItem).ToList();
+
+            CreateGrafics(appeals);
         }
     }
 }

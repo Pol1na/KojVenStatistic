@@ -72,9 +72,5 @@ namespace KojVenStatistic.Pages
         {
             UpdateList();
         }
-        private void BtnReport_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ReportClientsPage(_appeals));
-        }
     }
 }
