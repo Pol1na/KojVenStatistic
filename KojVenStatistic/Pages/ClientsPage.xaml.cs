@@ -77,5 +77,7 @@ namespace KojVenStatistic.Pages
         {
            NavigationService.Navigate(new ClientInfoPage((sender as Button).DataContext as Client));
         }
+
+
     }
 }

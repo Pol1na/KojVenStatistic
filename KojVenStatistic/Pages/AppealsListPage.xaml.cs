@@ -21,6 +21,7 @@ namespace KojVenStatistic.Pages
     /// </summary>
     public partial class AppealsListPage : Page
     {
+        private List<Appeal> _appeals = new List<Appeal>();
         public AppealsListPage()
         {
             InitializeComponent();
@@ -60,28 +61,8 @@ namespace KojVenStatistic.Pages
             string text = TBoxSearch.Text.ToLower();
             if (!string.IsNullOrWhiteSpace(text))
                 appeals = appeals.Where(x => x.Client.FullName.ToLower().Contains(text) || x.RequestDateText.ToLower().Contains(text) || x.AppealType.Name.ToLower().Contains(text)).ToList();
-            
-            
-            
-            /*
-            switch (CBoxSort.SelectedIndex)
-            {
-                case 1:
-                    appeals = appeals.OrderBy(x => x.Client.FullName).ToList();
-                    break;
-                case 2:
-                    appeals = appeals.OrderByDescending(x => x.Client.FullName).ToList();
-                    break;
-                case 3:
-                    appeals = appeals.OrderBy(x => x.RequestDateText).ToList();
-                    break;
-                case 4:
-                    appeals = appeals.OrderByDescending(x => x.RequestDateText).ToList();
-                    break;
-                default:
-                    break;
-            }*/
 
+            _appeals = appeals;
             ListCollectionView collectionView = new ListCollectionView(appeals);
             collectionView.GroupDescriptions.Add(new PropertyGroupDescription("AppealDateText"));
             LViewAppels.ItemsSource = collectionView;
@@ -90,6 +71,10 @@ namespace KojVenStatistic.Pages
         private void ChBoxIsActive_Click(object sender, RoutedEventArgs e)
         {
             UpdateList();
+        }
+        private void BtnReport_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ReportClientsPage(_appeals));
         }
     }
 }

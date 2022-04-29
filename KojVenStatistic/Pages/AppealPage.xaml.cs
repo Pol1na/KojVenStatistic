@@ -62,5 +62,6 @@ namespace KojVenStatistic.Pages
         {
             NavigationService.Navigate(new CreateAppealPage((sender as Button).DataContext as User));
         }
+
     }
 }

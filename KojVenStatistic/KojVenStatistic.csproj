@@ -51,6 +51,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml" />
@@ -62,9 +63,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -133,6 +136,9 @@
     <Compile Include="Pages\AppealsListPage.xaml.cs">
       <DependentUpon>AppealsListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ReportClientsPage.xaml.cs">
+      <DependentUpon>ReportClientsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddEditUserWindow.xaml.cs">
       <DependentUpon>AddEditUserWindow.xaml</DependentUpon>
     </Compile>
@@ -152,6 +158,10 @@
       <DependentUpon>TicketPreviewWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\AppealInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReportClientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

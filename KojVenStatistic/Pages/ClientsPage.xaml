@@ -61,5 +61,6 @@
             <TextBlock Text="Сортировка:" VerticalAlignment="Center"/>
             <ComboBox Width="170" Margin="10" x:Name="CBoxSort" SelectionChanged="CBoxSort_SelectionChanged"/>
         </StackPanel>
+
     </Grid>
 </Page>
