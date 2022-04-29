@@ -154,6 +154,9 @@
     <Compile Include="Windows\CreateDoctorVisitSertificateWindow.xaml.cs">
       <DependentUpon>CreateDoctorVisitSertificateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\RecipeWindow.xaml.cs">
+      <DependentUpon>RecipeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TicketPreviewWindow.xaml.cs">
       <DependentUpon>TicketPreviewWindow.xaml</DependentUpon>
     </Compile>
@@ -233,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ClientEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RecipeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

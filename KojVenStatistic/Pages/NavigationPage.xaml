@@ -44,7 +44,7 @@
         <Grid Background="{DynamicResource MainGreen}" Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0 50 0 10">
                 <DockPanel>
-                    <RadioButton Content="Записть к врачу" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnAppeal" Click="BtnAppeal_Click"/>
+                    <RadioButton Content="Запись к врачу" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnAppeal" Click="BtnAppeal_Click"/>
                     <RadioButton Content="Пользователи" Style="{StaticResource RBtnCute}" GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnUsers"  Click="BtnUsers_Click"/>
                     <RadioButton Content="Пациенты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnClients" Click="BtnClients_Click"/>
                     <RadioButton Content="Медикаменты" Style="{StaticResource RBtnCute}"  GroupName="Navigation" DockPanel.Dock="Top" x:Name="BtnMedicaments" Click="BtnMedicaments_Click" />

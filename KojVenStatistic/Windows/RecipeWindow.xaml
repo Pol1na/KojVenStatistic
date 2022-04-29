@@ -1,0 +1,40 @@
+﻿<Window x:Class="KojVenStatistic.Windows.RecipeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KojVenStatistic.Windows"
+        mc:Ignorable="d"
+        Title="Рецепт" Height="auto" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Background="White" Margin="10" x:Name="Recipe">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Рецепт" FontSize="24" HorizontalAlignment="Center" Margin="5 0"/>
+                <TextBlock Text="-----------------------------------" FontSize="24" HorizontalAlignment="Left" Margin="5 0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <TextBlock Text="Врач:" Margin="0 0 2 0"/>
+                    <TextBlock Text="{Binding Appeal.User.FullName}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <TextBlock Text="Пациент:" Margin="0 0 2 0"/>
+                    <TextBlock Text="{Binding Appeal.Client.FullName}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <TextBlock Text="Дата приема:" Margin="0 0 2 0"/>
+                    <TextBlock Text="{Binding Appeal.RequestDateText}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <TextBlock Text="Препараты:" Margin="0 0 2 0"/>
+                    <TextBlock Name="TBlockMedicaments" TextWrapping="Wrap" Width="100" />
+                </StackPanel>
+                <TextBlock Text="-----------------------------------" FontSize="24" HorizontalAlignment="Left" Margin="5 0"/>
+                <TextBlock Text="Курский Областной Клинический Кожно-Венерологический Диспансер" FontSize="16" HorizontalAlignment="Left" Margin="5 0" TextWrapping="Wrap" TextAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <Button Grid.Row="1" Content="Печать рецепта" x:Name="BtnRecipePrint" Click="BtnRecipePrint_Click"/>
+    </Grid>
+</Window>

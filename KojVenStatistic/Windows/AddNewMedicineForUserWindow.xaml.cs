@@ -97,11 +97,15 @@ namespace KojVenStatistic.Windows
                         _recipe = AppData.Context.Recipe.Add(new Recipe() { Appeal = _appeal, Date = DateTime.Now });
                     }
                     _recipe.MedicamentOfRecipe = null;
-
-                    AppData.Context.SaveChanges();
                     _recipe.MedicamentOfRecipe = _currentMedicamentOfRecipes;
-
                     AppData.Context.SaveChanges();
+                    if (new RecipeWindow(_recipe).ShowDialog() == true)
+                    {
+                        AppData.Context.SaveChanges();
+                        Close();
+                        MessageBox.Show("Рецепт успешно создан.", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
                     Close();
                 }
                 else
