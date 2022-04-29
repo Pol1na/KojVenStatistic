@@ -31,23 +31,31 @@ namespace KojVenStatistic.Windows
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (_selectedDiseases.Count>0)
             {
-                var medicament = new Medicament()
+                try
                 {
-                    Name = TBoxName.Text,
-                    Description = TBoxDescription.Text,
-                    Disease = _selectedDiseases,
-                };
-                AppData.Context.Medicament.Add(medicament);
-                AppData.Context.SaveChanges();
-                DialogResult = true;
-                Close();
+                    var medicament = new Medicament()
+                    {
+                        Name = TBoxName.Text,
+                        Description = TBoxDescription.Text,
+                        Disease = _selectedDiseases,
+                    };
+                    AppData.Context.Medicament.Add(medicament);
+                    AppData.Context.SaveChanges();
+                    DialogResult = true;
+                    Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Произошла ошибка проверьте правильность заполнения полей.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Произошла ошибка проверьте правильность заполнения полей.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Выберите хотя бы одно заболенивание.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         private void BtnAddDisease_Click(object sender, RoutedEventArgs e)

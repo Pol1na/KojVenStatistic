@@ -33,8 +33,16 @@ namespace KojVenStatistic.Windows
             {
                 dialog.PrintVisual(Ticket, "Талон к врачу");
             }
-            DialogResult = true;
-            Close();
+            try
+            {
+                DialogResult = true;
+                Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Возникла непредвиденная ошибка. Не нажимайте кнопку много раз", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

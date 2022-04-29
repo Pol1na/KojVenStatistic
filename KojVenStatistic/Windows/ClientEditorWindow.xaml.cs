@@ -90,8 +90,14 @@ namespace KojVenStatistic.Windows
                     if(_isCreating)
                         _client = new Client();
 
-
-                    _client.Snils = TBoxSnils.Text;
+                    try
+                    {
+                        Convert.ToInt32(TBoxSnils.Text);
+                    }
+                    catch (Exception)
+                    {
+                        errors += "Введите корректный СНИЛС\n";
+                    }
                     _client.LastName = TBoxSurname.Text;
                     _client.FirstName = TBoxName.Text;
                     _client.PassportSeria = TBoxPassportSeria.Text;

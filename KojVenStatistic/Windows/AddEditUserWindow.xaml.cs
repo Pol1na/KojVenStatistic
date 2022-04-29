@@ -76,43 +76,51 @@ namespace KojVenStatistic.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (_user!=null)
+            try
             {
-                _user.FirstName = TBoxName.Text;
-                _user.LastName = TBoxSurname.Text;
-                _user.Login = TBoxLogin.Text;
-                _user.Password = TBoxPassword.Text;
-                _user.PhoneNumber = TBoxPhone.Text;
-                _user.Email = TBoxEmail.Text;
-                _user.Post = CBoxPost.SelectedItem as Post;
-                _user.Category = CBoxSpec.SelectedItem as Category;
-                _user.Gender = CBoxGender.SelectedItem as Gender;
-                _user.Experience = Convert.ToInt32(TBoxExp.Text);
-                _user.Image = _img;
-                AppData.Context.SaveChanges();
-            }
-            else
-            {
-                _user = new User()
+                if (_user != null)
                 {
-                    FirstName = TBoxName.Text,
-                    LastName = TBoxSurname.Text,
-                    Login = TBoxLogin.Text,
-                    Email = TBoxEmail.Text,
-                    Password = TBoxPassword.Text,
-                    PhoneNumber = TBoxPhone.Text,
-                    Experience = Convert.ToInt32(TBoxExp.Text),
-                    Post = CBoxPost.SelectedItem as Post,
-                    Category = CBoxSpec.SelectedItem as Category,
-                    Gender = CBoxGender.SelectedItem as Gender,
-                    Image = _img,
-                };
-                AppData.Context.User.Add(_user);
-                AppData.Context.SaveChanges();
+                    _user.FirstName = TBoxName.Text;
+                    _user.LastName = TBoxSurname.Text;
+                    _user.Login = TBoxLogin.Text;
+                    _user.Password = TBoxPassword.Text;
+                    _user.PhoneNumber = TBoxPhone.Text;
+                    _user.Email = TBoxEmail.Text;
+                    _user.Post = CBoxPost.SelectedItem as Post;
+                    _user.Category = CBoxSpec.SelectedItem as Category;
+                    _user.Gender = CBoxGender.SelectedItem as Gender;
+                    _user.Experience = Convert.ToInt32(TBoxExp.Text);
+                    _user.Image = _img;
+                    AppData.Context.SaveChanges();
+                }
+                else
+                {
+                    _user = new User()
+                    {
+                        FirstName = TBoxName.Text,
+                        LastName = TBoxSurname.Text,
+                        Login = TBoxLogin.Text,
+                        Email = TBoxEmail.Text,
+                        Password = TBoxPassword.Text,
+                        PhoneNumber = TBoxPhone.Text,
+                        Experience = Convert.ToInt32(TBoxExp.Text),
+                        Post = CBoxPost.SelectedItem as Post,
+                        Category = CBoxSpec.SelectedItem as Category,
+                        Gender = CBoxGender.SelectedItem as Gender,
+                        Image = _img,
+                    };
+                    AppData.Context.User.Add(_user);
+                    AppData.Context.SaveChanges();
 
+                }
+                DialogResult = true;
+                Close();
             }
-            DialogResult = true;
-            Close();
+            catch (Exception)
+            {
+                MessageBox.Show("Перепроверьте правильность заполнения полей", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
     }
 }
