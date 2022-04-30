@@ -39,7 +39,7 @@ namespace KojVenStatistic.Pages
             DPickerRequetsDate.DisplayDateStart = DateTime.Now;
             DPickerRequetsDate.DisplayDateEnd = DateTime.Now.AddDays(14);
 
-            TBoxHour.Text = 7.ToString("00");
+            TBoxHour.Text = 8.ToString("00");
             TBoxMinute.Text = 0.ToString("00");
             DPickerRequetsDate.SelectedDate = DateTime.Now;
 
@@ -47,7 +47,7 @@ namespace KojVenStatistic.Pages
             {
                 AddInterval();
 
-                if ((DPickerRequetsDate.SelectedDate.Value.Date == DPickerRequetsDate.DisplayDateEnd.Value.Date.AddDays(1) && $"{hours}:{minutes}" == "7:0"))
+                if ((DPickerRequetsDate.SelectedDate.Value.Date == DPickerRequetsDate.DisplayDateEnd.Value.Date.AddDays(1) && $"{hours}:{minutes}" == "8:0"))
                 {
                     TBlockError.Text = "У данного врача нет свободных записей на две недели.";
                     SPanelDateTime.Visibility = Visibility.Collapsed;
@@ -148,8 +148,8 @@ namespace KojVenStatistic.Pages
         }
         private void UpdateArrows()
         {
-            BtnAddInterval.IsEnabled = !(DPickerRequetsDate.SelectedDate.Value.Date == DPickerRequetsDate.DisplayDateEnd.Value.Date && $"{hours}:{minutes}" == "17:45");
-            BtnRemoveInterval.IsEnabled = !(DPickerRequetsDate.SelectedDate.Value.Date == DPickerRequetsDate.DisplayDateStart.Value.Date && $"{hours}:{minutes}" == "7:0");
+            BtnAddInterval.IsEnabled = !(DPickerRequetsDate.SelectedDate.Value.Date == DPickerRequetsDate.DisplayDateEnd.Value.Date && $"{hours}:{minutes}" == "16:45");
+            BtnRemoveInterval.IsEnabled = !(DPickerRequetsDate.SelectedDate.Value.Date == DPickerRequetsDate.DisplayDateStart.Value.Date && $"{hours}:{minutes}" == "8:0");
         }
         private void RemoveInterval()
         {
@@ -161,9 +161,9 @@ namespace KojVenStatistic.Pages
                 {
                     TBoxHour.Text = (hours - 1).ToString("00");
                     TBoxMinute.Text = 45.ToString("00");
-                    if (hours == 6)
+                    if (hours == 7)
                     {
-                        TBoxHour.Text = 17.ToString("00");
+                        TBoxHour.Text = 16.ToString("00");
                         DPickerRequetsDate.SelectedDate = DPickerRequetsDate.SelectedDate.Value.AddDays(-1);
                     }
                 }
@@ -186,9 +186,9 @@ namespace KojVenStatistic.Pages
                     TBoxHour.Text = (hours + 1).ToString("00");
                     TBoxMinute.Text = 0.ToString("00");
 
-                    if (hours == 18)
+                    if (hours == 17)
                     {
-                        TBoxHour.Text = 7.ToString("00");
+                        TBoxHour.Text = 8.ToString("00");
                         DPickerRequetsDate.SelectedDate = DPickerRequetsDate.SelectedDate.Value.AddDays(1);
                     }
                 }
