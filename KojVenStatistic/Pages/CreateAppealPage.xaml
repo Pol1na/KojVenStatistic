@@ -31,16 +31,25 @@
                 <TextBlock Text="Тип приема:" Margin="5" VerticalAlignment="Center"/>
                 <ComboBox x:Name="CBoxTypeAppeal" DisplayMemberPath="Name" Width="150" Margin="5"  VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Дата записи:" Margin="5" VerticalAlignment="Center"/>
-                <DatePicker x:Name="DPickerRequetsDate"  Width="150" Margin="5" FontSize="16" VerticalAlignment="Center" />
+            <StackPanel x:Name="SPanelDateTime">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Дата записи:" Margin="5" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="DPickerRequetsDate"  Width="150" Margin="5" FontSize="16" VerticalAlignment="Center" SelectedDateChanged="DPickerRequetsDate_SelectedDateChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <TextBlock Text="Время:" Margin="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TBoxHour"  Width="30" Margin="5"  VerticalAlignment="Center" MaxLength="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                    <TextBlock Text=":" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TBoxMinute"  Width="30" Margin="5"  VerticalAlignment="Center" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Button Content="↑" Padding="5 0" Margin="1" x:Name="BtnAddInterval" Click="BtnAddInterval_Click"/>
+                        <Button Content="↓" Padding="5 0" Margin="1" x:Name="BtnRemoveInterval" Click="BtnRemoveInterval_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Время:" Margin="5" VerticalAlignment="Center"/>
-                <TextBox x:Name="TBoxHour"  Width="30" Margin="5"  VerticalAlignment="Center" MaxLength="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <TextBlock Text=":" VerticalAlignment="Center"/>
-                <TextBox x:Name="TBoxMinute"  Width="30" Margin="5"  VerticalAlignment="Center" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            </StackPanel>
+            <TextBlock Text="Прием на данное время уже назначен!" FontSize="12" HorizontalAlignment="Right" Margin="5 0" Foreground="Red" x:Name="TBlockError" Visibility="Hidden"/>
             <Button Content="Записаться" x:Name="BtnCreateAppeal" Click="BtnCreateAppeal_Click"/>
         </StackPanel>
     </Grid>
