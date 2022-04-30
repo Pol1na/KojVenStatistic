@@ -33,6 +33,7 @@ namespace KojVenStatistic.Pages
             _selectedDoctor = selectedDoctor;
             TBlockHeader.DataContext = selectedDoctor;
             CBoxSnils.ItemsSource = AppData.Context.Client.ToList();
+            DGridAppeals.ItemsSource = AppData.Context.Appeal.Where(p => p.User.Id == selectedDoctor.Id && p.DateOfRequest >= DateTime.Now).OrderBy(p=>p.DateOfRequest).ToList();
             CBoxTypeAppeal.ItemsSource = AppData.Context.AppealType.ToList();
 
             DPickerRequetsDate.DisplayDateStart = DateTime.Now;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KojVenStatistic.Windows"
         mc:Ignorable="d"
-        Title="{Binding ElementName=MainFrame,Path=Content.Title,StringFormat='Курский Областной Клинический Кожно-Венерологический Диспансер - {0}'}" MinHeight="450" MinWidth="800" Height="450" Width="800">
+        Title="{Binding ElementName=MainFrame,Path=Content.Title,StringFormat='Курский Областной Клинический Кожно-Венерологический Диспансер - {0}'}" MinHeight="450" MinWidth="800" Height="450" Width="850">
     <Grid>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

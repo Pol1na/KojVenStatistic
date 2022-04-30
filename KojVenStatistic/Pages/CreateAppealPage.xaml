@@ -9,15 +9,25 @@
       Title="Создание записи на прием">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition />
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Style="{StaticResource TBlockHeader}" Text="{Binding FullName,StringFormat='Создание записи к {0}'}" Margin="5" x:Name="TBlockHeader" Foreground="Black"/>
-
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+        <TextBlock Style="{StaticResource TBlockHeader}" Text="{Binding FullName,StringFormat='Создание записи к {0}'}" Grid.ColumnSpan="2"  x:Name="TBlockHeader" Foreground="Black"/>
+            <TextBlock Grid.Row="1" Text="Недоступно для записи" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+            <DataGrid Grid.Row="1" Height="250" Name="DGridAppeals" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Дата" Binding="{Binding RequestDateText, Mode=OneWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Время" Binding="{Binding RequestTimeText, Mode=OneWay}"></DataGridTextColumn>
+            </DataGrid.Columns>
+            </DataGrid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 -35 0">
                 <TextBlock Text="СНИЛС:" Margin="5" VerticalAlignment="Center"/>
                 <ComboBox IsEditable="True" x:Name="CBoxSnils" DisplayMemberPath="Snils" Width="150" Margin="5"  VerticalAlignment="Center"/>
